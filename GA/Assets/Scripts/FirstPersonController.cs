@@ -8,9 +8,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using Unity.VisualScripting;
+
 
 #if UNITY_EDITOR
-    using UnityEditor;
+using UnityEditor;
     using System.Net;
 #endif
 
@@ -362,6 +364,16 @@ public class FirstPersonController : MonoBehaviour
         {
             HeadBob();
         }
+
+        if (Input.GetKeyDown(KeyCode.E)) {
+            if (!isGrappling) {
+                Debug.Log("attempting grapple");
+                AttemptGrapple();
+            } else {
+                Debug.Log("canceled grapple");
+                isGrappling = false;
+            }
+        }
     }
 
     void FixedUpdate()
@@ -439,6 +451,10 @@ public class FirstPersonController : MonoBehaviour
         }
 
         #endregion
+
+        if(isGrappling) {
+            Grappling();
+        }
     }
 
     // Sets isGrounded based on a raycast sent straigth down from the player object
@@ -457,6 +473,37 @@ public class FirstPersonController : MonoBehaviour
         {
             isGrounded = false;
         }
+    }
+
+
+    private bool isGrappling = false;
+    private float maxGrappleDistance = 15f;
+    private Vector3 grappleAnchor;
+
+    private void AttemptGrapple() {
+        Vector3 origin = new Vector3(transform.position.x, transform.position.y, transform.position.z);
+        Vector3 direction = playerCamera.transform.TransformDirection(Vector3.forward);
+        if(Physics.Raycast(origin, direction, out RaycastHit hit, maxGrappleDistance)) {
+            //grapple hit
+            Debug.Log("Grapple hit!");
+            Debug.Log(hit.point);
+
+            grappleAnchor = hit.point;
+            isGrappling = true;
+        } else {
+            Debug.Log("Grapple miss :(");
+        }
+        
+    }
+
+    private void Grappling() {
+        Debug.Log("you are grappling my firend!");
+        //calculate grappling direction
+        Vector3 origin = new Vector3(transform.position.x, transform.position.y, transform.position.z);
+        Vector3 direction = grappleAnchor - origin;
+        //apply grappling force
+        rb.AddForce(direction*10, ForceMode.Force); //måste leka runt och fatta vad alla forcemodes osånt gör
+
     }
 
     private void Jump()

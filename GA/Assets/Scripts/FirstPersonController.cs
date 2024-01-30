@@ -478,17 +478,21 @@ public class FirstPersonController : MonoBehaviour
 
     private bool isGrappling = false;
     private float maxGrappleDistance = 15f;
+    private float grappleDistance;
+    private float grappleRetractingSpeed = 1;
     private Vector3 grappleAnchor;
+    private float grappleForce = 100;
 
     private void AttemptGrapple() {
         Vector3 origin = new Vector3(transform.position.x, transform.position.y, transform.position.z);
-        Vector3 direction = playerCamera.transform.TransformDirection(Vector3.forward);
+        Vector3 direction = playerCamera.transform.forward;
         if(Physics.Raycast(origin, direction, out RaycastHit hit, maxGrappleDistance)) {
             //grapple hit
             Debug.Log("Grapple hit!");
             Debug.Log(hit.point);
 
             grappleAnchor = hit.point;
+            grappleDistance = hit.distance;
             isGrappling = true;
         } else {
             Debug.Log("Grapple miss :(");
@@ -501,9 +505,18 @@ public class FirstPersonController : MonoBehaviour
         //calculate grappling direction
         Vector3 origin = new Vector3(transform.position.x, transform.position.y, transform.position.z);
         Vector3 direction = grappleAnchor - origin;
-        //apply grappling force
-        rb.AddForce(direction*10, ForceMode.Force); //måste leka runt och fatta vad alla forcemodes osånt gör
+        //is grapplinghook stretched?
+        if((grappleAnchor -  origin).magnitude >= grappleDistance)
+        {
+            //apply force
+            rb.AddForce(direction.normalized*grappleForce, ForceMode.Force); //måste leka runt och fatta vad alla forcemodes osånt gör
 
+        }
+        //retract grappling hook
+        if(grappleDistance > 0)
+        {
+            grappleDistance -= grappleRetractingSpeed;
+        }
     }
 
     private void Jump()

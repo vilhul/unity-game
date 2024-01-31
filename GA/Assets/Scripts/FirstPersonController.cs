@@ -9,6 +9,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using Unity.VisualScripting;
+using UnityEditor.PackageManager;
+
 
 
 #if UNITY_EDITOR
@@ -479,9 +481,9 @@ public class FirstPersonController : MonoBehaviour
     private bool isGrappling = false;
     private float maxGrappleDistance = 15f;
     private float grappleDistance;
-    private float grappleRetractingSpeed = 1;
+    private float grappleRetractingSpeed = 3;
     private Vector3 grappleAnchor;
-    private float grappleForce = 100;
+    //private float grappleForce = 100;
 
     private void AttemptGrapple() {
         Vector3 origin = new Vector3(transform.position.x, transform.position.y, transform.position.z);
@@ -490,6 +492,7 @@ public class FirstPersonController : MonoBehaviour
             //grapple hit
             Debug.Log("Grapple hit!");
             Debug.Log(hit.point);
+            Debug.Log(hit.distance);
 
             grappleAnchor = hit.point;
             grappleDistance = hit.distance;
@@ -508,14 +511,26 @@ public class FirstPersonController : MonoBehaviour
         //is grapplinghook stretched?
         if((grappleAnchor -  origin).magnitude >= grappleDistance)
         {
-            //apply force
-            rb.AddForce(direction.normalized*grappleForce, ForceMode.Force); //måste leka runt och fatta vad alla forcemodes osånt gör
+            Debug.Log("Stretched!");
+            Debug.Log((grappleAnchor-origin).magnitude);
+            Debug.Log(grappleDistance);
 
+
+            //apply force towards anchor
+
+            rb.AddForce(direction.normalized*200, ForceMode.Force);
+
+        }
+        else
+        {
+            Debug.Log("Not stretched :(");
+            Debug.Log((grappleAnchor - origin).magnitude);
+            Debug.Log(grappleDistance);
         }
         //retract grappling hook
         if(grappleDistance > 0)
         {
-            grappleDistance -= grappleRetractingSpeed;
+            //grappleDistance -= grappleRetractingSpeed;
         }
     }
 

@@ -481,7 +481,7 @@ public class FirstPersonController : MonoBehaviour
     private bool isGrappling = false;
     private float maxGrappleDistance = 15f;
     private float grappleDistance;
-    private float grappleRetractingSpeed = 3;
+    //private float grappleRetractingSpeed = 3;
     private Vector3 grappleAnchor;
     //private float grappleForce = 100;
 

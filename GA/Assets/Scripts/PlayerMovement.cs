@@ -10,15 +10,18 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private float jumpHeight = 3f;
 
     [Header("Movement")]
-    [SerializeField] private float walkSpeed = 6f;
-    [SerializeField] private float sprintSpeed = 12f;
+    [SerializeField] private float walkSpeed = 5f;
+    [SerializeField] private float sprintSpeed = 8f;
     [SerializeField] private KeyCode sprintKey = KeyCode.LeftShift;
 
     [Header("Grappling hook")]
     [SerializeField] private KeyCode grappleKey = KeyCode.E;
     [SerializeField] private float grappleRange = 15f;
+    [SerializeField] private float grapplingAcceleration = 30f;
+    private float grapplingVelocity = 0f;
     private bool isGrappling = false;
     private Vector3 grappleAnchor;
+    private Vector3 grapplingDirection = Vector3.zero;
     private float grappleDistance;
 
     [Header("References")]
@@ -74,17 +77,20 @@ public class PlayerMovement : MonoBehaviour
 
     private void ApplyGravity() {
         //gravity
-        velocity.y += gravity * Time.deltaTime;
+        if(!isGrappling) {
+            velocity.y += gravity * Time.deltaTime;
+        }
         controller.Move(velocity * Time.deltaTime);
 
         //stop applying gravity when grounded
         if (IsGrounded() && velocity.y < 0) {
             velocity.y = -2f;
+            grapplingVelocity = 0f;
         }
     }
 
     private void HandleGrappling() {
-        if(Input.GetKeyDown(grappleKey)) {
+        if (Input.GetKeyDown(grappleKey)) {
             if(!isGrappling) {
                 Debug.Log("Attemping Grapple");
                 AttemptGrapple();
@@ -97,10 +103,14 @@ public class PlayerMovement : MonoBehaviour
         if(isGrappling) {
             //JAG FUCKING HATAR VEKTORER
 
-            
+            grapplingDirection = grappleAnchor - transform.position;
+            grapplingVelocity += grapplingAcceleration * Time.deltaTime;
 
-            
+
+        } else {
+            grapplingVelocity -= grapplingAcceleration * 0.1f * Time.deltaTime;
         }
+        controller.Move(grapplingDirection.normalized * grapplingVelocity * Time.deltaTime);
     }
 
     private void AttemptGrapple() {
@@ -111,6 +121,7 @@ public class PlayerMovement : MonoBehaviour
             Debug.Log(hitInfo.point);
             Debug.Log(hitInfo.distance);
 
+            grapplingVelocity = 0;
             grappleAnchor = hitInfo.point;
             grappleDistance = hitInfo.distance;
             isGrappling = true;

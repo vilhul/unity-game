@@ -367,7 +367,7 @@ public class FirstPersonController : MonoBehaviour
             HeadBob();
         }
 
-        if (Input.GetKeyDown(KeyCode.E)) {
+        /*if (Input.GetKeyDown(KeyCode.E)) {
             if (!isGrappling) {
                 Debug.Log("attempting grapple");
                 AttemptGrapple();
@@ -375,7 +375,7 @@ public class FirstPersonController : MonoBehaviour
                 Debug.Log("canceled grapple");
                 isGrappling = false;
             }
-        }
+        } */
     }
 
     void FixedUpdate()

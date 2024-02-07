@@ -83,7 +83,7 @@ public class PlayerMovement : MonoBehaviour
         controller.Move(velocity * Time.deltaTime);
 
         //stop applying gravity when grounded
-        if (IsGrounded() && velocity.y < 0) {
+        if (IsGrounded() && !isGrappling && velocity.y < 0) {
             velocity.y = -2f;
             grapplingVelocity = 0f;
         }

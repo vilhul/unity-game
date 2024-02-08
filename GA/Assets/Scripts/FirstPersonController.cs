@@ -454,9 +454,6 @@ public class FirstPersonController : MonoBehaviour
 
         #endregion
 
-        if(isGrappling) {
-            Grappling();
-        }
     }
 
     // Sets isGrounded based on a raycast sent straigth down from the player object
@@ -477,7 +474,7 @@ public class FirstPersonController : MonoBehaviour
         }
     }
 
-
+    /*
     private bool isGrappling = false;
     private float maxGrappleDistance = 15f;
     private float grappleDistance;
@@ -532,7 +529,7 @@ public class FirstPersonController : MonoBehaviour
         {
             //grappleDistance -= grappleRetractingSpeed;
         }
-    }
+    } */
 
     private void Jump()
     {

@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem.HID;
+using UnityEngine.XR;
 
 public class PlayerMovement : MonoBehaviour
 {
@@ -18,6 +19,7 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private KeyCode grappleKey = KeyCode.E;
     [SerializeField] private float grappleRange = 15f;
     [SerializeField] private float grapplingAcceleration = 30f;
+    [SerializeField] private float breakDistance = 1f;
     private float grapplingVelocity = 0f;
     private bool isGrappling = false;
     private Vector3 grappleAnchor;
@@ -29,11 +31,17 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private Transform groundCheck;
     [SerializeField] private LayerMask groundMask;
     [SerializeField] private Camera playerCamera;
+    [SerializeField] private Transform gunTip;
 
     [Header("Misc")]
     [SerializeField] private float groundDistance = 0.4f;
 
     private Vector3 velocity;
+    private LineRenderer lr;
+
+    private void Awake() {
+        lr = GetComponent<LineRenderer>();
+    }
 
     void Update()
     {
@@ -42,6 +50,12 @@ public class PlayerMovement : MonoBehaviour
         ApplyGravity();
         HandleGrappling();
     }
+
+    private void LateUpdate() {
+        RenderGrapple();
+    }
+
+
     private bool IsGrounded() {
         //checks if gravity
         if (Physics.CheckSphere(groundCheck.position, groundDistance, groundMask)) {
@@ -96,6 +110,7 @@ public class PlayerMovement : MonoBehaviour
                 AttemptGrapple();
             } else {
                 Debug.Log("Disconnecting Grapple");
+                lr.positionCount = 0;
                 isGrappling = false;
             }
         }
@@ -105,6 +120,16 @@ public class PlayerMovement : MonoBehaviour
 
             grapplingDirection = grappleAnchor - transform.position;
             grapplingVelocity += grapplingAcceleration * Time.deltaTime;
+
+           /* Physics.Raycast(transform.position, grapplingDirection.normalized, out RaycastHit dist, grappleDistance);
+            if (dist.distance < breakDistance) {
+
+                Debug.Log("Disconnecting Grapple (too close)");
+                lr.positionCount = 0;
+                isGrappling = false;
+                return;
+            } */
+            
 
 
         } else {
@@ -125,9 +150,18 @@ public class PlayerMovement : MonoBehaviour
             grappleAnchor = hitInfo.point;
             grappleDistance = hitInfo.distance;
             isGrappling = true;
+
+            lr.positionCount = 2;
         } else {
             Debug.Log("Grapple miss");
         }
+    }
+
+    private void RenderGrapple() {
+        if (!isGrappling) return;
+
+        lr.SetPosition(index: 0, gunTip.position);
+        lr.SetPosition(index: 1, grappleAnchor);
     }
 
 }

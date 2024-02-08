@@ -1,0 +1,19 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8a9bc308bf35e624088a038f35e8b3d5, type: 3}
+  m_Name: Grappling Gun
+  m_EditorClassIdentifier: 
+  name: Grappling Gun
+  description: A grappling gun, come on you knew that
+  image: {fileID: 0}
+  cost: 3
+  abilityObject: {fileID: 0}

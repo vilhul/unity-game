@@ -377,7 +377,7 @@ GameObject:
   - component: {fileID: 57715130}
   - component: {fileID: 57715132}
   - component: {fileID: 57715131}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: ChipModel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2648,7 +2648,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 604115044}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: GunTip
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3225,8 +3225,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 731723328}
-  - component: {fileID: 731723329}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: AbilityChip
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3250,21 +3249,6 @@ Transform:
   - {fileID: 1100891004}
   m_Father: {fileID: 1152681757}
   m_LocalEulerAnglesHint: {x: -114.87, y: -21.33, z: -17.27}
---- !u!114 &731723329
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 731723327}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 39df1531b68256443926ca8f88f0c0a9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  abilitySO: {fileID: 11400000, guid: b9c690457e6f1a446908bab23d408477, type: 2}
-  titleTMP: {fileID: 1810749256}
-  descriptionTMP: {fileID: 1817504419}
 --- !u!1 &755848349
 GameObject:
   m_ObjectHideFlags: 0
@@ -3274,7 +3258,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 755848350}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: Hand
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -6500,9 +6484,11 @@ GameObject:
   m_Component:
   - component: {fileID: 1069519025}
   - component: {fileID: 1069519024}
+  - component: {fileID: 1069519030}
   - component: {fileID: 1069519026}
   - component: {fileID: 1069519027}
   - component: {fileID: 1069519028}
+  - component: {fileID: 1069519029}
   m_Layer: 0
   m_Name: FirstPersonPlayer
   m_TagString: Untagged
@@ -6561,7 +6547,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1069519023}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: db33a34204e13ef4bb98f5be2ba97620, type: 3}
   m_Name: 
@@ -6574,7 +6560,6 @@ MonoBehaviour:
   grappleKey: 101
   grappleRange: 25
   grapplingAcceleration: 40
-  breakDistance: 1
   controller: {fileID: 1069519024}
   groundCheck: {fileID: 1717060106}
   groundMask:
@@ -6694,7 +6679,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1069519023}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 53cb3905b4b320742981cfdc4f6e5aee, type: 3}
   m_Name: 
@@ -6711,6 +6696,35 @@ MonoBehaviour:
   sprintSpeed: 8
   sprintKey: 304
   groundDistance: 0.4
+--- !u!114 &1069519029
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1069519023}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 39df1531b68256443926ca8f88f0c0a9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  abilitySO: {fileID: 0}
+  titleTMP: {fileID: 1810749256}
+  descriptionTMP: {fileID: 1817504419}
+--- !u!114 &1069519030
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1069519023}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 862122f9a15284a4d93c5b1c1a878f82, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  abilities:
+  - {fileID: 11400000, guid: ae8818adc5331df489d2f6e10b38ca45, type: 2}
 --- !u!1 &1086236438 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 75bb3c4a8b4b0db49b69a98ed4eb13a8, type: 3}
@@ -7155,7 +7169,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1152681757}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: GrapplingGun
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -10593,7 +10607,7 @@ GameObject:
   - component: {fileID: 2100642448}
   - component: {fileID: 2100642450}
   - component: {fileID: 2100642449}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: GrapplingGunModel
   m_TagString: Untagged
   m_Icon: {fileID: 0}

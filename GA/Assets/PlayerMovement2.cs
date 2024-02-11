@@ -25,10 +25,10 @@ public class PlayerMovement2 : MonoBehaviour {
 
     private Vector3 velocity;
 
-    void Update() {
+    void Update() {/*
         Movement();
         Jumping();
-        ApplyGravity();
+        ApplyGravity();*/
     }
 
     private bool IsGrounded() {
@@ -40,7 +40,7 @@ public class PlayerMovement2 : MonoBehaviour {
         }
     }
 
-    private void Movement() {
+    public void Movement() {
         //get movement
         float x = Input.GetAxis("Horizontal");
         float z = Input.GetAxis("Vertical");
@@ -56,7 +56,7 @@ public class PlayerMovement2 : MonoBehaviour {
         }
     }
 
-    private void Jumping() {
+    public void Jumping() {
         //check if jumping
         if (Input.GetButtonDown("Jump") && IsGrounded()) {
             //jump
@@ -64,7 +64,7 @@ public class PlayerMovement2 : MonoBehaviour {
         }
     }
 
-    private void ApplyGravity() {
+    public void ApplyGravity() {
         //gravity
      
         velocity.y += gravity * Time.deltaTime;

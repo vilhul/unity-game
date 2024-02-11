@@ -19,7 +19,7 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private KeyCode grappleKey = KeyCode.E;
     [SerializeField] private float grappleRange = 15f;
     [SerializeField] private float grapplingAcceleration = 30f;
-    [SerializeField] private float breakDistance = 1f;
+    //[SerializeField] private float breakDistance = 1f;
     private float grapplingVelocity = 0f;
     private bool isGrappling = false;
     private Vector3 grappleAnchor;

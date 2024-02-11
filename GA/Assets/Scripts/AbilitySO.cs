@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "New Ability", menuName = "Ability")]
-public class AbilitySO : ScriptableObject
+public abstract class AbilitySO : ScriptableObject
 {
 
     public enum AbilityType {
@@ -19,5 +19,9 @@ public class AbilitySO : ScriptableObject
 
     public int cost;
     public AbilityType abilityType;
+
+    public virtual void HandleAbility() {
+        Debug.Log("You are using " +  name);
+    }
 
 }

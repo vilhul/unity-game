@@ -20,7 +20,7 @@ public abstract class AbilitySO : ScriptableObject
     public int cost;
     public AbilityType abilityType;
 
-    public virtual void HandleAbility() {
+    public virtual void HandleAbility(Player player) {
         Debug.Log("You are using " +  name);
     }
 

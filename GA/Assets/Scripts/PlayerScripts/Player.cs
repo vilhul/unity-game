@@ -5,10 +5,10 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
-    private CharacterController playerCharacterController;
+    public CharacterController playerCharacterController;
 
     [SerializeField] private List<AbilitySO> abilities = new List<AbilitySO>();
-    private PlayerMovement2 playerMovement;
+    public PlayerMovement2 playerMovement;
 
     private void Start() {
         playerMovement = GetComponent<PlayerMovement2>();
@@ -27,7 +27,7 @@ public class Player : MonoBehaviour
 
         //handle abilities
         foreach (var abilitySO in abilities) {
-            abilitySO.HandleAbility();
+            abilitySO.HandleAbility(this.GetComponent<Player>());
         }
     }
 }

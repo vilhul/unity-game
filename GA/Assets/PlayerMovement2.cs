@@ -23,7 +23,7 @@ public class PlayerMovement2 : MonoBehaviour {
     [Header("Misc")]
     [SerializeField] private float groundDistance = 0.4f;
 
-    private Vector3 velocity;
+    public Vector3 velocity;
 
     void Update() {/*
         Movement();

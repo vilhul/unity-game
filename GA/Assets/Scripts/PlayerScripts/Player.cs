@@ -6,13 +6,15 @@ using UnityEngine;
 public class Player : MonoBehaviour
 {
     public CharacterController playerCharacterController;
+    public PlayerMovement2 playerMovement;
+    public Camera playerCamera;
 
     [SerializeField] private List<AbilitySO> abilities = new List<AbilitySO>();
-    public PlayerMovement2 playerMovement;
 
     private void Start() {
         playerMovement = GetComponent<PlayerMovement2>();
         playerCharacterController = GetComponent<CharacterController>();
+        playerCamera = GetComponentInChildren<Camera>();
 
         foreach (var abilitySO in abilities) {
            Debug.Log(abilitySO.name);

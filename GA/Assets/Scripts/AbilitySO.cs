@@ -9,7 +9,7 @@ public abstract class AbilitySO : ScriptableObject
     public enum AbilityType {
         Passive,
         Weapon,
-        Ability
+        Active
     }
 
     public new string name;

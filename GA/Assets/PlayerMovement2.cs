@@ -13,7 +13,7 @@ public class PlayerMovement2 : MonoBehaviour {
 
     [Header("Jumping and Gravity")]
     public float gravity = -29.46f;
-    [SerializeField] private float jumpHeight = 3f;
+    public float jumpHeight = 3f;
     
     [Header("Movement")]
     [SerializeField] private float walkSpeed = 5f;
@@ -31,7 +31,7 @@ public class PlayerMovement2 : MonoBehaviour {
         ApplyGravity();*/
     }
 
-    private bool IsGrounded() {
+    public bool IsGrounded() {
         //checks if gravity
         if (Physics.CheckSphere(groundCheck.position, groundDistance, groundMask)) {
             return true;
@@ -66,7 +66,7 @@ public class PlayerMovement2 : MonoBehaviour {
 
     public void ApplyGravity() {
         //gravity
-     
+
         velocity.y += gravity * Time.deltaTime;
         
         controller.Move(velocity * Time.deltaTime);

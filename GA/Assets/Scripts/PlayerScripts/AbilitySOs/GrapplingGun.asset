@@ -16,5 +16,6 @@ MonoBehaviour:
   description: gunnnn
   image: {fileID: 0}
   cost: 3
-  abilityType: 0
+  abilityType: 2
   grappleKey: 101
+  grappleRange: 25

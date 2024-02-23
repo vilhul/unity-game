@@ -9,7 +9,7 @@ public class Player : MonoBehaviour
     public PlayerMovement2 playerMovement;
     public Camera playerCamera;
 
-    [SerializeField] private List<AbilitySO> abilities = new List<AbilitySO>();
+    public List<AbilitySO> abilities = new List<AbilitySO>();
 
     private void Start() {
         playerMovement = GetComponent<PlayerMovement2>();

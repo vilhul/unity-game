@@ -13,7 +13,7 @@ public class GrapplingGun : AbilitySO {
     public float grappleRange = 25f;
     
     private float grappleDistance;
-    private float grappleSpeed;
+    private float grappleSpeed = 0;
     private Vector3 grappleAnchor;
     private Vector3 grapplingDirection = Vector3.zero;
 
@@ -41,10 +41,7 @@ public class GrapplingGun : AbilitySO {
             case GrapplingState.grappling:
 
                 grapplingDirection = grappleAnchor - player.transform.position;
-                grappleSpeed += 40 * Time.deltaTime;
-                player.playerMovement.velocity.y -= player.playerMovement.gravity * Time.deltaTime;
-                player.playerMovement.velocity += grapplingDirection.normalized * grappleSpeed * Time.deltaTime;
-                Debug.Log(player.playerMovement.velocity.y);
+                grappleSpeed += 40f * Time.deltaTime;
 
                 if(Input.GetKeyDown(grappleKey)) {
                     state = GrapplingState.cooldown;
@@ -56,6 +53,17 @@ public class GrapplingGun : AbilitySO {
 
                 break;
         }
+
+        if(state != GrapplingState.grappling) {
+            grappleSpeed -= 0.1f * Time.deltaTime;
+            if(player.playerMovement.IsGrounded()) {
+                grappleSpeed = 0;
+            }
+        }
+
+
+
+        player.playerCharacterController.Move(grappleSpeed * Time.deltaTime * grapplingDirection.normalized);
     }
 
     private void AttemptGrapple(Player player) {

@@ -1922,6 +1922,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: AbilityChip (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 8570220694062361561, guid: fa24bda302e753140aa2698b6dddeff2, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -7195,6 +7199,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1fbc3f0e9e9089e428a0e71014bfbf6e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  abilityChipPrefab: {fileID: 8570220694062361561, guid: fa24bda302e753140aa2698b6dddeff2, type: 3}
+  abilityChips: {fileID: 1445555881}
 --- !u!1 &1086236438 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 75bb3c4a8b4b0db49b69a98ed4eb13a8, type: 3}
@@ -10227,6 +10233,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: AbilityChip
       objectReference: {fileID: 0}
+    - target: {fileID: 8570220694062361561, guid: fa24bda302e753140aa2698b6dddeff2, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -11281,27 +11291,27 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 2659760331287481149, guid: fa24bda302e753140aa2698b6dddeff2, type: 3}
       propertyPath: m_LocalScale.x
-      value: 0.39999998
+      value: 0.3
       objectReference: {fileID: 0}
     - target: {fileID: 2659760331287481149, guid: fa24bda302e753140aa2698b6dddeff2, type: 3}
       propertyPath: m_LocalScale.y
-      value: 0.39999992
+      value: 0.3
       objectReference: {fileID: 0}
     - target: {fileID: 2659760331287481149, guid: fa24bda302e753140aa2698b6dddeff2, type: 3}
       propertyPath: m_LocalScale.z
-      value: 0.3999999
+      value: 0.3
       objectReference: {fileID: 0}
     - target: {fileID: 2659760331287481149, guid: fa24bda302e753140aa2698b6dddeff2, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -0.28
+      value: -0.25
       objectReference: {fileID: 0}
     - target: {fileID: 2659760331287481149, guid: fa24bda302e753140aa2698b6dddeff2, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.11500013
+      value: 0.09
       objectReference: {fileID: 0}
     - target: {fileID: 2659760331287481149, guid: fa24bda302e753140aa2698b6dddeff2, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0.43
+      value: 0.35
       objectReference: {fileID: 0}
     - target: {fileID: 2659760331287481149, guid: fa24bda302e753140aa2698b6dddeff2, type: 3}
       propertyPath: m_LocalRotation.w

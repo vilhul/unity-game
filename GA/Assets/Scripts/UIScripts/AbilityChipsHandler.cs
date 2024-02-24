@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -5,27 +6,29 @@ using UnityEngine;
 public class AbilityChipsHandler : MonoBehaviour
 {
 
-    public enum ChipState {
-        Default,
-        Browsing,
-    }
-
-    private ChipState state = ChipState.Default;
+    [SerializeField] GameObject abilityChipPrefab;
+    [SerializeField] Transform abilityChips;
 
     private Player player;
+    private List<GameObject> abilityChipInstances = new List<GameObject> ();
 
     private void Start() {
+        
         player = GetComponent<Player>();
-    }
-
-
-    private void Update() {
-        switch(state) {
-            case ChipState.Default:
-                break;
-            case ChipState.Browsing:
-                break;
+        foreach (AbilitySO ability in player.abilities) {
+            Debug.Log(ability.name);
+            GameObject abilityChipInstance = Instantiate(abilityChipPrefab, abilityChips.position, Quaternion.identity);
+            abilityChipInstances.Add(abilityChipInstance);
+            AbilityChip abilityChipScript = abilityChipInstance.GetComponent<AbilityChip>();
+            abilityChipScript.Setup();
         }
     }
 
+    private void Update() {
+        for(int i = 0; i<abilityChipInstances.Count; i++) {
+            AbilityChip abilityChipScript = abilityChipInstances[i].GetComponent<AbilityChip>();
+            if (abilityChipScript != null) { return; }
+            abilityChipScript.UpdatePosition(i);
+        }
+    }
 }

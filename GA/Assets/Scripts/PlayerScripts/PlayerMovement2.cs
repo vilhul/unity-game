@@ -1,5 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.Netcode;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem.XR;
 
@@ -8,9 +10,9 @@ using UnityEngine.InputSystem.XR;
 // OKEJ SÅ SKILLNADEN MELLAN DEN HÄR OCH PLAYERMOVEMENT (1) ÄR ATT DEN HÄR SAKNAR GRAPPLE KOD, FÖR GRAPPLE KOD ÄR I ETT EGET OBJEKT
 // MEN PLAYERMOVEMENT SKRIPTET ÄR KVAR FÖR REFERENS NÄR JAG FORTSÄTTER LEKA MED GRAPPLE HOOKEN. DEN SKA RYKA SÅ SMÅNINGOM
 
-public class PlayerMovement2 : MonoBehaviour {
+public class PlayerMovement2 : NetworkBehaviour
+{
 
-    [Header("References")]
     [SerializeField] private CharacterController controller;
     [SerializeField] private Transform groundCheck;
     [SerializeField] private LayerMask groundMask;
@@ -31,6 +33,7 @@ public class PlayerMovement2 : MonoBehaviour {
     public Vector3 velocity;
 
     public bool IsGrounded() {
+
         //checks if gravity
         if (Physics.CheckSphere(groundCheck.position, groundDistance, groundMask)) {
             return true;
@@ -40,6 +43,7 @@ public class PlayerMovement2 : MonoBehaviour {
     }
 
     public void Movement() {
+        if (!IsOwner) return;
         //get movement
         float x = Input.GetAxis("Horizontal");
         float z = Input.GetAxis("Vertical");
@@ -56,6 +60,7 @@ public class PlayerMovement2 : MonoBehaviour {
     }
 
     public void Jumping() {
+        if (!IsOwner) return;
         //check if jumping
         if (Input.GetButtonDown("Jump") && IsGrounded()) {
             //jump
@@ -65,7 +70,7 @@ public class PlayerMovement2 : MonoBehaviour {
 
     public void ApplyGravity() {
         //gravity
-
+        if (!IsOwner) return;
         velocity.y += gravity * Time.deltaTime;
         
         controller.Move(velocity * Time.deltaTime);

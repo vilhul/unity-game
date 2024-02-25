@@ -1,8 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.Netcode;
 using UnityEngine;
 
-public class MouseLook : MonoBehaviour
+public class MouseLook : NetworkBehaviour
 {
 
     [SerializeField] private float mouseSensitivty = 100f;
@@ -10,10 +11,13 @@ public class MouseLook : MonoBehaviour
     private float xRotation = 0f;
 
     private void Start() {
+        if (!IsOwner) return;
         Cursor.lockState = CursorLockMode.Locked;
+
     }
 
     private void Update() {
+        if (!IsOwner) return;
         float mouseX = Input.GetAxis("Mouse X") * mouseSensitivty * Time.deltaTime;
         float mouseY = Input.GetAxis("Mouse Y") * mouseSensitivty * Time.deltaTime;
 

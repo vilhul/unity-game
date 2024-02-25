@@ -1,9 +1,10 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.Netcode;
 using Unity.VisualScripting;
 using UnityEngine;
 
-public class Player : MonoBehaviour
+public class Player : NetworkBehaviour
 {
     public CharacterController playerCharacterController;
     public PlayerMovement2 playerMovement;
@@ -12,8 +13,10 @@ public class Player : MonoBehaviour
     public List<AbilitySO> abilities = new List<AbilitySO>();
 
     private void Start() {
+        if (!IsOwner) return;
         playerMovement = GetComponent<PlayerMovement2>();
         playerCharacterController = GetComponent<CharacterController>();
+        playerCamera.enabled = true;
         playerCamera = GetComponentInChildren<Camera>();
 
         foreach (var abilitySO in abilities) {
@@ -22,6 +25,7 @@ public class Player : MonoBehaviour
     }
 
     private void Update() {
+        if (!IsOwner) return;
         playerMovement.Movement();
         playerMovement.Jumping();
         playerMovement.ApplyGravity();

@@ -6,14 +6,14 @@ using UnityEngine.InputSystem.XR;
 using UnityEngine.UIElements;
 
 [CreateAssetMenu(fileName = "New GrapplingGun", menuName = "GrapplingGun")]
-public class GrapplingGun : AbilitySO {
+public class GrapplingGunSO : AbilitySO {
 
 
     public KeyCode grappleKey = KeyCode.E;
     public float grappleRange = 25f;
     
     private float grappleDistance;
-    private float grappleSpeed = 0;
+    public float grappleSpeed = 0;
     private Vector3 grappleAnchor;
     private Vector3 grapplingDirection = Vector3.zero;
 

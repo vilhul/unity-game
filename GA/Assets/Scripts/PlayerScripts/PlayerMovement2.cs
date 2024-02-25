@@ -3,6 +3,11 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem.XR;
 
+
+
+// OKEJ SÅ SKILLNADEN MELLAN DEN HÄR OCH PLAYERMOVEMENT (1) ÄR ATT DEN HÄR SAKNAR GRAPPLE KOD, FÖR GRAPPLE KOD ÄR I ETT EGET OBJEKT
+// MEN PLAYERMOVEMENT SKRIPTET ÄR KVAR FÖR REFERENS NÄR JAG FORTSÄTTER LEKA MED GRAPPLE HOOKEN. DEN SKA RYKA SÅ SMÅNINGOM
+
 public class PlayerMovement2 : MonoBehaviour {
 
     [Header("References")]
@@ -24,12 +29,6 @@ public class PlayerMovement2 : MonoBehaviour {
     [SerializeField] private float groundDistance = 0.4f;
 
     public Vector3 velocity;
-
-    void Update() {/*
-        Movement();
-        Jumping();
-        ApplyGravity();*/
-    }
 
     public bool IsGrounded() {
         //checks if gravity

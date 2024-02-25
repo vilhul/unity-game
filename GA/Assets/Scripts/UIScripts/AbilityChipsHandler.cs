@@ -17,17 +17,17 @@ public class AbilityChipsHandler : MonoBehaviour
         player = GetComponent<Player>();
         foreach (AbilitySO ability in player.abilities) {
             Debug.Log(ability.name);
-            GameObject abilityChipInstance = Instantiate(abilityChipPrefab, abilityChips.position, Quaternion.identity);
+            GameObject abilityChipInstance = Instantiate(abilityChipPrefab, abilityChips);
             abilityChipInstances.Add(abilityChipInstance);
             AbilityChip abilityChipScript = abilityChipInstance.GetComponent<AbilityChip>();
-            abilityChipScript.Setup();
+            abilityChipScript.Setup(abilityChips);
         }
     }
 
     private void Update() {
         for(int i = 0; i<abilityChipInstances.Count; i++) {
             AbilityChip abilityChipScript = abilityChipInstances[i].GetComponent<AbilityChip>();
-            if (abilityChipScript != null) { return; }
+            if (abilityChipScript == null) { return; }
             abilityChipScript.UpdatePosition(i);
         }
     }

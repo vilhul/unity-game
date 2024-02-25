@@ -75,7 +75,6 @@ GameObject:
   - component: {fileID: 6209954812446935788}
   - component: {fileID: 220001649542917960}
   - component: {fileID: 900980619318157711}
-  - component: {fileID: 7838687327216190825}
   - component: {fileID: 5147633989330465967}
   - component: {fileID: 3441028173602114808}
   - component: {fileID: 4220739487649689154}
@@ -98,7 +97,7 @@ Transform:
   m_GameObject: {fileID: 4559609202295253437}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 50, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -152,34 +151,6 @@ MonoBehaviour:
   - {fileID: 11400000, guid: ae8818adc5331df489d2f6e10b38ca45, type: 2}
   - {fileID: 11400000, guid: 00c9079ea3fd4d7488682638017b70ab, type: 2}
   - {fileID: 11400000, guid: f19c85f2275986146b356323e27781d6, type: 2}
---- !u!114 &7838687327216190825
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4559609202295253437}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: db33a34204e13ef4bb98f5be2ba97620, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  gravity: -29.46
-  jumpHeight: 3
-  walkSpeed: 6
-  sprintSpeed: 12
-  sprintKey: 304
-  grappleKey: 101
-  grappleRange: 25
-  grapplingAcceleration: 40
-  controller: {fileID: 220001649542917960}
-  groundCheck: {fileID: 6148738091574707339}
-  groundMask:
-    serializedVersion: 2
-    m_Bits: 1024
-  playerCamera: {fileID: 1906212846604583886}
-  gunTip: {fileID: 6034860075169114906}
-  groundDistance: 0.4
 --- !u!120 &5147633989330465967
 LineRenderer:
   serializedVersion: 2
@@ -725,11 +696,6 @@ PrefabInstance:
 --- !u!4 &3226520937987000877 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2381017439737152056, guid: 1c71048017c3aba4d9293795a33e3964, type: 3}
-  m_PrefabInstance: {fileID: 994720532301105173}
-  m_PrefabAsset: {fileID: 0}
---- !u!4 &6034860075169114906 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 6777306447399887631, guid: 1c71048017c3aba4d9293795a33e3964, type: 3}
   m_PrefabInstance: {fileID: 994720532301105173}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1678817987569415692

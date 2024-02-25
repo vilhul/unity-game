@@ -23,6 +23,7 @@ public class AbilityChip : MonoBehaviour
     public void Setup(Transform abilityChips) {
         state = ChipState.Default;
         transform.SetParent(abilityChips);
+        transform.position = abilityChips.position;
     }
 
     public void UpdatePosition(int i) {

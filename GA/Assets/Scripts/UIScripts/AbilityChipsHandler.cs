@@ -28,7 +28,7 @@ public class AbilityChipsHandler : MonoBehaviour
         for(int i = 0; i<abilityChipInstances.Count; i++) {
             AbilityChip abilityChipScript = abilityChipInstances[i].GetComponent<AbilityChip>();
             if (abilityChipScript == null) { return; }
-            abilityChipScript.UpdatePosition(i);
+            //abilityChipScript.UpdatePosition(i);
         }
     }
 }

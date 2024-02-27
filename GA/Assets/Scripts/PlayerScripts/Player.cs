@@ -12,12 +12,30 @@ public class Player : NetworkBehaviour
 
     public List<AbilitySO> abilities = new List<AbilitySO>();
 
+
+
+    public override void OnNetworkSpawn()
+    {
+        if (IsOwner)
+        {
+            playerCamera = GetComponentInChildren<Camera>();
+            playerCamera.enabled = true;
+            playerCamera.depth = 1;
+
+        } else
+        {
+
+            playerCamera.depth = 0;
+        }
+
+
+    }
+
     private void Start() {
         if (!IsOwner) return;
         playerMovement = GetComponent<PlayerMovement2>();
         playerCharacterController = GetComponent<CharacterController>();
-        playerCamera.enabled = true;
-        playerCamera = GetComponentInChildren<Camera>();
+
 
         foreach (var abilitySO in abilities) {
            Debug.Log(abilitySO.name);

@@ -16,7 +16,6 @@ public class PlayerMovement2 : NetworkBehaviour
     [SerializeField] private CharacterController controller;
     [SerializeField] private Transform groundCheck;
     [SerializeField] private LayerMask groundMask;
-    [SerializeField] private Camera playerCamera;
 
     [Header("Jumping and Gravity")]
     public float gravity = -29.46f;

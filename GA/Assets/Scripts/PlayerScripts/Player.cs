@@ -13,6 +13,8 @@ public class Player : NetworkBehaviour
     public List<AbilitySO> abilities = new List<AbilitySO>();
 
 
+    public KeyCode selectKey = KeyCode.G;
+
 
     public override void OnNetworkSpawn()
     {

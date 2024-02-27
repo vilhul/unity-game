@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: Dash
   m_EditorClassIdentifier: 
   name: Dash
-  description: zooom
-  image: {fileID: 0}
+  description: "Rapidly propel yourself forward (det \xE4r en blink just nu stumpan)"
+  sprite: {fileID: 21300000, guid: 159c30b90fcf70e428a20155bff0e969, type: 3}
   cost: 2
   abilityType: 2
   dashKey: 102

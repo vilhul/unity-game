@@ -15,7 +15,7 @@ public abstract class AbilitySO : ScriptableObject
     public new string name;
     public string description;
 
-    public Sprite image;
+    public Sprite sprite;
 
     public int cost;
     public AbilityType abilityType;

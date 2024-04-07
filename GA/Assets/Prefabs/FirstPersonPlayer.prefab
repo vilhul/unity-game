@@ -218,6 +218,7 @@ MonoBehaviour:
   playerCharacterController: {fileID: 220001649542917960}
   playerMovement: {fileID: 0}
   playerCamera: {fileID: 0}
+  lineRenderer: {fileID: 0}
   abilities:
   - {fileID: 11400000, guid: ae8818adc5331df489d2f6e10b38ca45, type: 2}
   - {fileID: 11400000, guid: 00c9079ea3fd4d7488682638017b70ab, type: 2}

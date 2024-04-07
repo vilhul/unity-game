@@ -11,9 +11,10 @@ public class GrapplingGunSO : AbilitySO {
 
     public KeyCode grappleKey = KeyCode.E;
     public float grappleRange = 25f;
+    public float grappleSpeed = 0;
+    public GameObject grapplingGunModel;
     
     private float grappleDistance;
-    public float grappleSpeed = 0;
     private Vector3 grappleAnchor;
     private Vector3 grapplingDirection = Vector3.zero;
 
@@ -43,6 +44,9 @@ public class GrapplingGunSO : AbilitySO {
                 grapplingDirection = grappleAnchor - player.transform.position;
                 grappleSpeed += 40f * Time.deltaTime;
 
+
+                RenderGrapple(player);
+
                 if(Input.GetKeyDown(grappleKey)) {
                     state = GrapplingState.cooldown;
                 }
@@ -59,6 +63,9 @@ public class GrapplingGunSO : AbilitySO {
             if(player.playerMovement.IsGrounded()) {
                 grappleSpeed = 0;
             }
+
+
+            player.lineRenderer.enabled = false;
         }
 
 
@@ -88,5 +95,11 @@ public class GrapplingGunSO : AbilitySO {
 
 
 
+    }
+
+    private void RenderGrapple(Player player) {
+        player.lineRenderer.enabled = true;
+        player.lineRenderer.SetPosition(0, player.transform.position + new Vector3(0.714999974f, -0.386999995f, 1.06200004f));
+        player.lineRenderer.SetPosition(1, grappleAnchor);
     }
 }

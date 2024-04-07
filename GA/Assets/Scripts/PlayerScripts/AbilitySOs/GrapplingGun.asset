@@ -22,3 +22,4 @@ MonoBehaviour:
   grappleKey: 101
   grappleRange: 25
   grappleSpeed: 0
+  grapplingGunModel: {fileID: 4814289438040945128, guid: 1c71048017c3aba4d9293795a33e3964, type: 3}

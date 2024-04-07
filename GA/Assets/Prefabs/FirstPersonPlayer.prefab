@@ -222,6 +222,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: ae8818adc5331df489d2f6e10b38ca45, type: 2}
   - {fileID: 11400000, guid: 00c9079ea3fd4d7488682638017b70ab, type: 2}
   - {fileID: 11400000, guid: f19c85f2275986146b356323e27781d6, type: 2}
+  - {fileID: 11400000, guid: b65374d858aff9040abf9fc50a09b7ea, type: 2}
   selectKey: 103
 --- !u!120 &5147633989330465967
 LineRenderer:
@@ -231,7 +232,7 @@ LineRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4559609202295253437}
-  m_Enabled: 0
+  m_Enabled: 1
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
@@ -628,15 +629,15 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 2381017439737152056, guid: 1c71048017c3aba4d9293795a33e3964, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0.487
+      value: 0.715
       objectReference: {fileID: 0}
     - target: {fileID: 2381017439737152056, guid: 1c71048017c3aba4d9293795a33e3964, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.472
+      value: -0.387
       objectReference: {fileID: 0}
     - target: {fileID: 2381017439737152056, guid: 1c71048017c3aba4d9293795a33e3964, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0.456
+      value: 1.062
       objectReference: {fileID: 0}
     - target: {fileID: 2381017439737152056, guid: 1c71048017c3aba4d9293795a33e3964, type: 3}
       propertyPath: m_LocalRotation.w

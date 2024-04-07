@@ -9,6 +9,7 @@ public class Player : NetworkBehaviour
     public CharacterController playerCharacterController;
     public PlayerMovement2 playerMovement;
     public Camera playerCamera;
+    public LineRenderer lineRenderer;
 
     public List<AbilitySO> abilities = new List<AbilitySO>();
 
@@ -37,7 +38,7 @@ public class Player : NetworkBehaviour
         if (!IsOwner) return;
         playerMovement = GetComponent<PlayerMovement2>();
         playerCharacterController = GetComponent<CharacterController>();
-
+        lineRenderer = GetComponent<LineRenderer>();
 
         foreach (var abilitySO in abilities) {
            Debug.Log(abilitySO.name);

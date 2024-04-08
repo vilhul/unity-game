@@ -41,6 +41,14 @@ public class PlayerManager : NetworkBehaviour
         lineRenderer = GetComponent<LineRenderer>();
 
         foreach (var abilitySO in abilities) {
+            if(abilitySO.name == "Small Gun") {
+                SmallGunSO smallGunSO = (SmallGunSO)abilitySO;
+                smallGunSO.hasSpawnedGun = false;
+            }
+            if(abilitySO.name == "Grappling Gun") {
+                GrapplingGunSO grapplingGunSO = (GrapplingGunSO)abilitySO;
+                grapplingGunSO.hasSpawnedGrapplingGun = false;
+            }
            Debug.Log(abilitySO.name);
         };
     }

@@ -18,3 +18,6 @@ MonoBehaviour:
   cost: 0
   abilityType: 1
   gunModel: {fileID: 4227425383271145983, guid: 8ba179067d01b884a9045e3ec41e7eeb, type: 3}
+  bullet: {fileID: 368769159469670288, guid: 5a5d634e556df4d4ca3a856addee524e, type: 3}
+  hasSpawnedGun: 1
+  bulletSpeed: 0

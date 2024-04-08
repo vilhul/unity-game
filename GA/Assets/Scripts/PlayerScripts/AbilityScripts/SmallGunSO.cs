@@ -7,7 +7,7 @@ using UnityEngine;
 public class SmallGunSO : AbilitySO
 {
     public GameObject gunModel;
-    private bool hasSpawnedGun = false;
+    public bool hasSpawnedGun = false;
 
     private void Awake() {
         hasSpawnedGun = false;
@@ -15,13 +15,10 @@ public class SmallGunSO : AbilitySO
 
     public override void HandleAbility(Player player) {
         if(!hasSpawnedGun) {
-            Debug.Log(gunModel.name);
-            Debug.Log(player.name);
             GameObject gunModelInstance = Instantiate(gunModel, player.transform.position, player.transform.rotation);
             gunModelInstance.transform.SetParent(player.transform.Find("Camera").Find("FirstPersonCamera"));
-            Debug.Log(player.transform.name);
-            Debug.Log(gunModelInstance.name);
-            Debug.Log("AAAAAAAAAA");
+            gunModelInstance.transform.localPosition = new Vector3(0.769999981f, -0.289999992f, 0.980000019f);
+            gunModelInstance.transform.Rotate(0f, 173.800003f, 0f);
             hasSpawnedGun = true;
         }
     }

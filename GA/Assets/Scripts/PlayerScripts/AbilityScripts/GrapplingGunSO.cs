@@ -13,7 +13,9 @@ public class GrapplingGunSO : AbilitySO {
     public float grappleRange = 25f;
     public float grappleSpeed = 0;
     public GameObject grapplingGunModel;
+    public bool hasSpawnedGrapplingGun;
     
+    private LineRenderer lineRenderer;
     private float grappleDistance;
     private Vector3 grappleAnchor;
     private Vector3 grapplingDirection = Vector3.zero;
@@ -24,12 +26,27 @@ public class GrapplingGunSO : AbilitySO {
         grappling,
         cooldown
     }
-    GrapplingState state = GrapplingState.ready;
+    GrapplingState state;
 
     
 
     public override void HandleAbility(Player player) {
-           switch (state) {
+        if(!hasSpawnedGrapplingGun) {
+
+            GameObject gunModelInstance = Instantiate(grapplingGunModel, player.transform.position, player.transform.rotation);
+            gunModelInstance.transform.SetParent(player.transform.Find("Camera").Find("FirstPersonCamera"));
+            gunModelInstance.transform.localPosition = new Vector3(-1.47000003f, 0.209999993f, 1.50999999f);
+            gunModelInstance.transform.Rotate(new Vector3(0f, 0f, 336.980011f));
+            lineRenderer = player.lineRenderer;
+            //lineRenderer = player.transform.Find("Camera").Find("FirstPersonCamera").Find("GrapplingGunModel(Clone)").GetComponent<LineRenderer>();
+
+            hasSpawnedGrapplingGun = true;
+            state = GrapplingState.ready;
+        }
+
+
+
+        switch (state) {
             case GrapplingState.ready:
 
                 if (Input.GetKeyDown(grappleKey)) {
@@ -43,8 +60,6 @@ public class GrapplingGunSO : AbilitySO {
 
                 grapplingDirection = grappleAnchor - player.transform.position;
                 grappleSpeed += 40f * Time.deltaTime;
-
-
                 RenderGrapple(player);
 
                 if(Input.GetKeyDown(grappleKey)) {
@@ -65,7 +80,7 @@ public class GrapplingGunSO : AbilitySO {
             }
 
 
-            player.lineRenderer.enabled = false;
+            lineRenderer.enabled = false;
         }
 
 
@@ -98,8 +113,9 @@ public class GrapplingGunSO : AbilitySO {
     }
 
     private void RenderGrapple(Player player) {
-        player.lineRenderer.enabled = true;
-        player.lineRenderer.SetPosition(0, player.transform.position + new Vector3(0.714999974f, -0.386999995f, 1.06200004f));
-        player.lineRenderer.SetPosition(1, grappleAnchor);
+        lineRenderer.enabled = true;
+        //lineRenderer.SetPosition(0, player.transform.Find("PlayerModel").Find("GrappleSpawnPoint").position);
+        lineRenderer.SetPosition(0, player.transform.Find("Camera").Find("FirstPersonCamera").Find("GrapplingGunModel(Clone)").Find("GunTip").position);
+        lineRenderer.SetPosition(1, grappleAnchor);
     }
 }

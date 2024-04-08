@@ -7,7 +7,7 @@ using UnityEngine;
 public class DoubleJumpSO : AbilitySO
 {
     public bool hasDoubleJumped = false;
-    public override void HandleAbility(Player player) {
+    public override void HandleAbility(PlayerManager player) {
         
         if (player.playerMovement.IsGrounded()) {
             hasDoubleJumped = false;

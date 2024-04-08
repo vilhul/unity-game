@@ -16,7 +16,7 @@ public class DashSO : AbilitySO
     }
     DashState state = DashState.ready;
 
-    public override void HandleAbility(Player player) {
+    public override void HandleAbility(PlayerManager player) {
         switch(state) {
             case DashState.ready:
 

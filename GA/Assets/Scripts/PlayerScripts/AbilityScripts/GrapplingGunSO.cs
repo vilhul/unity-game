@@ -28,7 +28,7 @@ public class GrapplingGunSO : AbilitySO {
 
     
 
-    public override void HandleAbility(Player player) {
+    public override void HandleAbility(PlayerManager player) {
            switch (state) {
             case GrapplingState.ready:
 
@@ -73,7 +73,7 @@ public class GrapplingGunSO : AbilitySO {
         player.playerCharacterController.Move(grappleSpeed * Time.deltaTime * grapplingDirection.normalized);
     }
 
-    private void AttemptGrapple(Player player) {
+    private void AttemptGrapple(PlayerManager player) {
         Debug.Log("attempting grapple");
         Vector3 origin = new Vector3(player.transform.position.x, player.transform.position.y, player.transform.position.z);
         Debug.Log(origin);
@@ -97,7 +97,7 @@ public class GrapplingGunSO : AbilitySO {
 
     }
 
-    private void RenderGrapple(Player player) {
+    private void RenderGrapple(PlayerManager player) {
         player.lineRenderer.enabled = true;
         player.lineRenderer.SetPosition(0, player.transform.position + new Vector3(0.714999974f, -0.386999995f, 1.06200004f));
         player.lineRenderer.SetPosition(1, grappleAnchor);

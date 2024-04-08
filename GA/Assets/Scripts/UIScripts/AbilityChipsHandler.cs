@@ -10,7 +10,7 @@ public class AbilityChipsHandler : MonoBehaviour
     [SerializeField] GameObject abilityChipPrefab;
     [SerializeField] Transform abilityChips;
 
-    private Player player;
+    private PlayerManager player;
     private List<GameObject> abilityChipInstances = new List<GameObject> ();
     private int selectedChip = 0;
     private bool hasScrolled = false;
@@ -26,7 +26,7 @@ public class AbilityChipsHandler : MonoBehaviour
 
     private void Start() {
         
-        player = GetComponent<Player>();
+        player = GetComponent<PlayerManager>();
         foreach (AbilitySO ability in player.abilities) {
             GameObject abilityChipInstance = Instantiate(abilityChipPrefab, abilityChips.transform.position, abilityChips.transform.rotation);
             abilityChipInstances.Add(abilityChipInstance);

@@ -4,7 +4,7 @@ using Unity.Netcode;
 using Unity.VisualScripting;
 using UnityEngine;
 
-public class Player : NetworkBehaviour
+public class PlayerManager : NetworkBehaviour
 {
     public CharacterController playerCharacterController;
     public PlayerMovement2 playerMovement;
@@ -54,7 +54,7 @@ public class Player : NetworkBehaviour
 
         //handle abilities
         foreach (var abilitySO in abilities) {
-            abilitySO.HandleAbility(this.GetComponent<Player>());
+            abilitySO.HandleAbility(this.GetComponent<PlayerManager>());
         }
     }
 }

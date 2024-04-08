@@ -13,7 +13,7 @@ public class SmallGunSO : AbilitySO
         hasSpawnedGun = false;
     }
 
-    public override void HandleAbility(Player player) {
+    public override void HandleAbility(PlayerManager player) {
         if(!hasSpawnedGun) {
             Debug.Log(gunModel.name);
             Debug.Log(player.name);

@@ -12,6 +12,7 @@ public class AbilityChip : MonoBehaviour {
 
     [SerializeField] private TMP_Text titleTMP;
     [SerializeField] private TMP_Text descriptionTMP;
+    [SerializeField] private TMP_Text timerTMP;
     [SerializeField] private Image imageTMP;
     public GameObject selected;
 

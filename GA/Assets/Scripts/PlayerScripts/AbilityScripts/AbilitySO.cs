@@ -19,6 +19,8 @@ public abstract class AbilitySO : ScriptableObject
 
     public int cost;
     public AbilityType abilityType;
+    public int AbilityCooldown;
+    private float TimeRemaining;
 
     public virtual void HandleAbility(PlayerManager player) {
         Debug.Log("You are using " +  name);

@@ -53,7 +53,7 @@ public class LobbyManager : MonoBehaviour
     }
 
 
-
+    private float playersInLobby;
     private float heartbeatTimer;
     private float lobbyPollTimer;
     private float refreshLobbyListTimer = 5f;
@@ -71,7 +71,8 @@ public class LobbyManager : MonoBehaviour
         //HandleRefreshLobbyList(); // Disabled Auto Refresh for testing with multiple builds
         HandleLobbyHeartbeat();
         HandleLobbyPolling();
-    }
+
+     }
 
     public async void Authenticate(string playerName)
     {
@@ -446,8 +447,12 @@ public class LobbyManager : MonoBehaviour
 
             try
             {
+                playersInLobby = 0;
                 Debug.Log("StartGame");
-
+                foreach (Player player in joinedLobby.Players)
+                {
+                    playersInLobby++;
+                }
                 string relayCode = await TestRelay.Instance.CreateRelay();
 
                 Lobby lobby = await Lobbies.Instance.UpdateLobbyAsync(joinedLobby.Id, new UpdateLobbyOptions

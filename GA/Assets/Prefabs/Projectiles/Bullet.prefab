@@ -16,6 +16,7 @@ GameObject:
   - component: {fileID: 1012492312729961023}
   - component: {fileID: 8746319026791474781}
   - component: {fileID: -8481930732297240002}
+  - component: {fileID: -3524178418800999330}
   m_Layer: 0
   m_Name: Bullet
   m_TagString: Untagged
@@ -123,7 +124,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  GlobalObjectIdHash: 2914113117
+  GlobalObjectIdHash: 3558631206
   AlwaysReplicateAsRoot: 0
   SynchronizeTransform: 1
   ActiveSceneSynchronization: 0
@@ -144,9 +145,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   damage: 10
-  bulletSpeed: 0
-  rb: {fileID: 8746319026791474781}
-  direction: {x: 0, y: 0, z: 0}
+  bulletSpeed: 20
 --- !u!54 &8746319026791474781
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -189,9 +188,9 @@ MonoBehaviour:
   SyncPositionX: 1
   SyncPositionY: 1
   SyncPositionZ: 1
-  SyncRotAngleX: 0
-  SyncRotAngleY: 0
-  SyncRotAngleZ: 0
+  SyncRotAngleX: 1
+  SyncRotAngleY: 1
+  SyncRotAngleZ: 1
   SyncScaleX: 0
   SyncScaleY: 0
   SyncScaleZ: 0
@@ -204,3 +203,15 @@ MonoBehaviour:
   InLocalSpace: 0
   Interpolate: 1
   SlerpPosition: 0
+--- !u!114 &-3524178418800999330
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 368769159469670288}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f6c0be61502bb534f922ebb746851216, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

@@ -1,38 +1,34 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Networking;
 using Unity.Netcode;
 using Unity.Netcode.Components;
+
 public class Bullet : NetworkBehaviour
 {
-
     public int damage = 10;
+    public float bulletSpeed = 20f;
 
-    public float bulletSpeed;
-    public Rigidbody rb;
-    public Vector3 direction;
+    private Rigidbody rb;
 
-
-    private void Start() {
-        GetComponent<NetworkTransform>().enabled = true;
-    }
-
-
-
-    void Update()
+    public override void OnNetworkSpawn()
     {
-        // Move the bullet locally
-        transform.Translate(Vector3.forward * bulletSpeed * Time.deltaTime);
+        rb = GetComponent<Rigidbody>();
+
+        // Ensure bullet is owned by the server
+        if (IsServer)
+        {
+            // Enable Rigidbody for physics simulation
+            rb.isKinematic = false;
+            // Make sure it's moving forward
+            rb.velocity = transform.forward * bulletSpeed;
+        }
     }
 
-
-    /* private void OnCollisionEnter(Collision collision) {
-        //här skriver vi kod för att ta skada
-        if (!isServer)
+    private void OnCollisionEnter(Collision collision)
+    {
+        // Check if the bullet has authority
+        if (!IsOwner)
             return;
-
+        Debug.Log("destroy bullet");
         // Check if the collision is with a player
         PlayerHealth playerHealth = collision.gameObject.GetComponent<PlayerHealth>();
         if (playerHealth != null)
@@ -41,8 +37,18 @@ public class Bullet : NetworkBehaviour
             playerHealth.TakeDamage(damage);
         }
 
-        // Destroy the bullet after collision
-        NetworkServer.Destroy(gameObject);
-        Destroy(gameObject);
-    } */
+        // Destroy the bullet
+        DestroyBullet();
+    }
+
+    private void DestroyBullet()
+    {
+        // Check if the bullet has authority
+        if (!IsOwner)
+            return;
+
+        // Destroy the bullet on the server
+        NetworkObject networkObject = GetComponent<NetworkObject>();
+        networkObject.Despawn(true);
+    }
 }

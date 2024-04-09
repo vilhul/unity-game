@@ -6,16 +6,13 @@ using UnityEngine;
 using UnityEngine.InputSystem.XR;
 
 
-
-// OKEJ SÅ SKILLNADEN MELLAN DEN HÄR OCH PLAYERMOVEMENT (1) ÄR ATT DEN HÄR SAKNAR GRAPPLE KOD, FÖR GRAPPLE KOD ÄR I ETT EGET OBJEKT
-// MEN PLAYERMOVEMENT SKRIPTET ÄR KVAR FÖR REFERENS NÄR JAG FORTSÄTTER LEKA MED GRAPPLE HOOKEN. DEN SKA RYKA SÅ SMÅNINGOM
-
 public class PlayerMovement2 : NetworkBehaviour
 {
 
     [SerializeField] private CharacterController controller;
     [SerializeField] private Transform groundCheck;
-    [SerializeField] private LayerMask groundMask;
+    [SerializeField] private Transform topCheck;
+    public LayerMask groundMask;
 
     [Header("Jumping and Gravity")]
     public float gravity = -29.46f;
@@ -28,6 +25,7 @@ public class PlayerMovement2 : NetworkBehaviour
 
     [Header("Misc")]
     [SerializeField] private float groundDistance = 0.4f;
+    [SerializeField] private float topDistance = 0.4f;
 
     public Vector3 velocity;
 
@@ -35,6 +33,14 @@ public class PlayerMovement2 : NetworkBehaviour
 
         //checks if gravity
         if (Physics.CheckSphere(groundCheck.position, groundDistance, groundMask)) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    public bool IsTopped() {
+        if (Physics.CheckSphere(topCheck.position, topDistance, groundMask)) {
             return true;
         } else {
             return false;
@@ -77,6 +83,11 @@ public class PlayerMovement2 : NetworkBehaviour
         //stop applying gravity when grounded
         if (IsGrounded() && velocity.y < 0) {
             velocity.y = -2f;
+        }
+
+        //reset velocity when beneath something ("collide")
+        if (IsTopped()) {
+            velocity = Vector3.zero;
         }
     }
 }

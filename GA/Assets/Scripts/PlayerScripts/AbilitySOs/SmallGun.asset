@@ -13,10 +13,13 @@ MonoBehaviour:
   m_Name: SmallGun
   m_EditorClassIdentifier: 
   name: Small Gun
-  description: 
-  sprite: {fileID: 0}
+  description: Your default weapon. Shoots bullets towards your enemies which right
+    now is the only way to kill them
+  sprite: {fileID: 21300000, guid: 5d00d7dbe9bcfbf42b005a9500d672b3, type: 3}
   cost: 0
   abilityType: 1
+  abilityCooldown: 10
+  abilityCountdown: 10
   gunModel: {fileID: 4227425383271145983, guid: 8ba179067d01b884a9045e3ec41e7eeb, type: 3}
   bullet: {fileID: 368769159469670288, guid: 5a5d634e556df4d4ca3a856addee524e, type: 3}
   hasSpawnedGun: 1

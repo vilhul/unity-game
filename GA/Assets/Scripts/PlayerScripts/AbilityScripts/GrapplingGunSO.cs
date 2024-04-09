@@ -1,7 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Runtime.CompilerServices;
 using Unity.Services.Lobbies.Models;
 using Unity.VisualScripting;
+using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 using UnityEngine.InputSystem.XR;
 using UnityEngine.UIElements;
@@ -14,6 +16,7 @@ public class GrapplingGunSO : AbilitySO
     public KeyCode grappleKey = KeyCode.E;
     public float grappleRange = 25f;
     public float grappleSpeed = 0;
+    public float grappleMinDistance = 2f;
     public GameObject grapplingGunModel;
     public bool hasSpawnedGrapplingGun;
 
@@ -43,7 +46,6 @@ public class GrapplingGunSO : AbilitySO
             gunModelInstance.transform.localPosition = new Vector3(-1.47000003f, 0.209999993f, 1.50999999f);
             gunModelInstance.transform.Rotate(new Vector3(0f, 0f, 336.980011f));
             lineRenderer = player.lineRenderer;
-            //lineRenderer = player.transform.Find("Camera").Find("FirstPersonCamera").Find("GrapplingGunModel(Clone)").GetComponent<LineRenderer>();
 
             hasSpawnedGrapplingGun = true;
             state = GrapplingState.ready;
@@ -73,10 +75,15 @@ public class GrapplingGunSO : AbilitySO
                 {
                     state = GrapplingState.cooldown;
                 }
+
                 break;
             case GrapplingState.cooldown:
-
-                state = GrapplingState.ready;
+                if(abilityCountdown <= 0) {
+                    state = GrapplingState.ready;
+                    abilityCountdown = abilityCooldown;
+                } else {
+                    abilityCountdown -= Time.deltaTime;
+                }
 
                 break;
         }
@@ -95,6 +102,9 @@ public class GrapplingGunSO : AbilitySO
 
 
 
+        if(player.playerMovement.IsTopped()) {
+            grappleSpeed = 0;
+        }
         player.playerCharacterController.Move(grappleSpeed * Time.deltaTime * grapplingDirection.normalized);
     }
 
@@ -129,8 +139,26 @@ public class GrapplingGunSO : AbilitySO
     private void RenderGrapple(PlayerManager player)
     {
         lineRenderer.enabled = true;
-        //lineRenderer.SetPosition(0, player.transform.Find("PlayerModel").Find("GrappleSpawnPoint").position);
-        lineRenderer.SetPosition(0, player.transform.Find("Camera").Find("FirstPersonCamera").Find("GrapplingGunModel(Clone)").Find("GunTip").position);
-        lineRenderer.SetPosition(1, grappleAnchor);
+        Vector3 startPoint = player.transform.Find("Camera").Find("FirstPersonCamera").Find("GrapplingGunModel(Clone)").Find("GunTip").position;
+        Vector3 endPoint = grappleAnchor;
+
+        lineRenderer.SetPosition(0, startPoint);
+        lineRenderer.SetPosition(1, endPoint);
+
+        //see if anything is in the way
+        //ok det här funkar inte (fattar INTE varför)
+        /*
+        Debug.Log(direction.magnitude);
+        if(direction.magnitude < grappleMinDistance) {
+            state = GrapplingState.cooldown;
+        }
+        */
+
+        Vector3 direction = endPoint - player.transform.position;
+        if (Physics.Raycast(player.transform.position, direction.normalized, out RaycastHit hitInfo, direction.magnitude, player.playerMovement.groundMask)) {
+            if(hitInfo.transform.position != grappleAnchor) {
+                state = GrapplingState.cooldown;
+            }
+        }
     }
 }

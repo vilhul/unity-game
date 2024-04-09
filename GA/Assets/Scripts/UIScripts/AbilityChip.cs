@@ -10,10 +10,14 @@ using UnityEngine.UI;
 
 public class AbilityChip : MonoBehaviour {
 
-    [SerializeField] private TMP_Text titleTMP;
+    public TMP_Text titleTMP;
+    public TMP_Text toActivateTMP;
     [SerializeField] private TMP_Text descriptionTMP;
     [SerializeField] private TMP_Text timerTMP;
     [SerializeField] private Image imageTMP;
+    [SerializeField] private MeshRenderer model;
+    [SerializeField] private Material readyMaterial;
+    [SerializeField] private Material notReadyMaterial;
     public GameObject selected;
 
 
@@ -28,10 +32,11 @@ public class AbilityChip : MonoBehaviour {
 
     public void UpdatePosition(int i, AbilityChipsHandler.ChipState state) {
         if(state == AbilityChipsHandler.ChipState.Default) {
-            transform.localPosition = new Vector3(-0.36f, -0.21f + i*0.01f, 0f);
+            transform.localPosition = new Vector3(-0.36f, -0.21f + i*0.015f, 0f);
             transform.localEulerAngles = Vector3.zero;
             transform.localScale = new Vector3(0.3f, 0.3f, 0.3f);
             gameObject.SetActive(true);
+            toActivateTMP.text = ("");
         }
 
         if(state == AbilityChipsHandler.ChipState.Browsing) {
@@ -41,8 +46,6 @@ public class AbilityChip : MonoBehaviour {
             gameObject.SetActive(true);
         }
 
-
-        //den här raden går att kommenteras bort bereonde på om man vill att de andra chipsen ska vara kvar när man läser
         if(state == AbilityChipsHandler.ChipState.Selected) {
             gameObject.SetActive(false);
         }
@@ -51,9 +54,21 @@ public class AbilityChip : MonoBehaviour {
     public void ShowSelected() {
         gameObject.SetActive(true);
         selected.SetActive(false);
+        toActivateTMP.text = ("");
         transform.localPosition = new Vector3(0f, 0f, -0.1f);
         transform.localEulerAngles = new Vector3(-90f, 0f, 0f);
         transform.localScale = new Vector3(0.7f, 0.7f, 0.7f);
+    }
+
+    public void UpdateTimer(AbilitySO ability) {
+        timerTMP.text = Mathf.Ceil(ability.abilityCountdown).ToString();
+
+        if(ability.abilityCountdown == ability.abilityCooldown) {
+            timerTMP.text = string.Empty;
+            model.material = readyMaterial;
+        } else {
+            model.material = notReadyMaterial;
+        }
     }
 }
 

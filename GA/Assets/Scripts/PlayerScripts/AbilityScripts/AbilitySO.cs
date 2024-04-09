@@ -19,7 +19,8 @@ public abstract class AbilitySO : ScriptableObject
 
     public int cost;
     public AbilityType abilityType;
-    public int AbilityCooldown;
+    public float abilityCooldown = 10f;
+    public float abilityCountdown = 0f;
     private float TimeRemaining;
 
     public virtual void HandleAbility(PlayerManager player) {

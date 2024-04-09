@@ -41,6 +41,8 @@ public class PlayerManager : NetworkBehaviour
         lineRenderer = GetComponent<LineRenderer>();
 
         foreach (var abilitySO in abilities) {
+            abilitySO.abilityCountdown = abilitySO.abilityCooldown;
+
             if(abilitySO.name == "Small Gun") {
                 SmallGunSO smallGunSO = (SmallGunSO)abilitySO;
                 smallGunSO.hasSpawnedGun = false;

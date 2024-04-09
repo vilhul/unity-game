@@ -40,7 +40,15 @@ public class AbilityChipsHandler : MonoBehaviour
             AbilityChip abilityChipScript = abilityChipInstances[i].GetComponent<AbilityChip>();
             if (abilityChipScript == null) { return; }
             abilityChipScript.UpdatePosition(i, state);
+
+            foreach(AbilitySO ability in player.abilities) {
+                if(ability.name == abilityChipScript.titleTMP.text) {
+                    abilityChipScript.UpdateTimer(ability);
+                }
+            }
         }
+
+
 
         switch(state) {
             case ChipState.Default:
@@ -75,8 +83,10 @@ public class AbilityChipsHandler : MonoBehaviour
                     for(int i = 0;  i < abilityChipInstances.Count; i++) {
                         if(selectedChip == i) {
                             abilityChipInstances[i].GetComponent<AbilityChip>().selected.SetActive(true);
+                            abilityChipInstances[i].GetComponent<AbilityChip>().toActivateTMP.text = ("Press G to read more");
                         } else {
                             abilityChipInstances[i].GetComponent<AbilityChip>().selected.SetActive(false);
+                            abilityChipInstances[i].GetComponent<AbilityChip>().toActivateTMP.text = ("");
                         }
                     }
                     

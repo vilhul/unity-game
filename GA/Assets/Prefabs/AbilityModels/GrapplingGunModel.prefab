@@ -43,7 +43,6 @@ GameObject:
   - component: {fileID: 3976031818219607011}
   - component: {fileID: 1532959049867292784}
   - component: {fileID: 7717424596411730814}
-  - component: {fileID: 913045844376022664}
   m_Layer: 6
   m_Name: GrapplingGunModel
   m_TagString: Untagged
@@ -221,15 +220,3 @@ LineRenderer:
   m_UseWorldSpace: 0
   m_Loop: 0
   m_ApplyActiveColorSpace: 1
---- !u!114 &913045844376022664
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4814289438040945128}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b8d54bfe992808e479790d9a03b2186a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 

@@ -7,7 +7,7 @@ public class DashSO : AbilitySO
 {
 
     public KeyCode dashKey = KeyCode.F;
-    public float dashRange = 15f;
+    public float dashRange = 11f;
 
     enum DashState {
         ready,
@@ -32,7 +32,12 @@ public class DashSO : AbilitySO
 
                 break;
             case DashState.cooldown:
-                state = DashState.ready;
+                if (abilityCountdown <= 0) {
+                    state = DashState.ready;
+                    abilityCountdown = abilityCooldown;
+                } else {
+                    abilityCountdown -= Time.deltaTime;
+                }
                 break;
         }
     }

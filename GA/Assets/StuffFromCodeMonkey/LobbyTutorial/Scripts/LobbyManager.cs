@@ -460,6 +460,9 @@ public class LobbyManager : MonoBehaviour
 
                 joinedLobby = lobby;
 
+                
+
+
             } catch (LobbyServiceException e)
             {
                 Debug.Log(e);

@@ -28,7 +28,6 @@ public class PlayerManager : NetworkBehaviour
         if (IsOwner)
         {
 
-            firstPersonPlayerCamera = GetComponentInChildren<Camera>();
             firstPersonPlayerCamera.enabled = true;
             firstPersonPlayerCamera.depth = 1;
             playerCamera = GetComponentInChildren<Camera>();

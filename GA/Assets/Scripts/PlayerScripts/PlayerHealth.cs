@@ -22,10 +22,20 @@ public class PlayerHealth : NetworkBehaviour
 
     public override void OnNetworkSpawn()
     {
+
         alive.Value = true;
         currentHealth.Value = 100;
         spectatorCamera = GameObject.FindWithTag("Spectator Camera");
+        if (IsOwner)
+        {
+            healthBarImage.enabled = true;
+            healthText.enabled = true;
+        } else
+        {
 
+            healthBarImage.enabled = false;
+            healthText.enabled = false;
+        }
 
 
     }

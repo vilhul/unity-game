@@ -269,10 +269,9 @@ MonoBehaviour:
   firstPersonPlayerCamera: {fileID: 5783959687270670058}
   lineRenderer: {fileID: 0}
   abilities:
-  - {fileID: 11400000, guid: ae8818adc5331df489d2f6e10b38ca45, type: 2}
-  - {fileID: 11400000, guid: 00c9079ea3fd4d7488682638017b70ab, type: 2}
-  - {fileID: 11400000, guid: f19c85f2275986146b356323e27781d6, type: 2}
   - {fileID: 11400000, guid: b65374d858aff9040abf9fc50a09b7ea, type: 2}
+  chips: 50
+  shopCanvas: {fileID: 0}
   selectKey: 103
   spawnAreaCenter: {x: 0, y: 5, z: 0}
   spawnAreaSize: {x: 100, y: 0, z: 100}

@@ -24,13 +24,13 @@ public class EditPlayerName : MonoBehaviour {
         Instance = this;
 
         GetComponent<Button>().onClick.AddListener(() => {
-            UI_InputWindow.Show_Static("UserName", playerName, "abcdefghijklmnopqrstuvxywzABCDEFGHIJKLMNOPQRSTUVXYWZ .,-", 20,
+            UI_InputWindow.Show_Static("UserName", playerName, "abcdefghijklmnopqrstuvxywzABCDEFGHIJKLMNOPQRSTUVXYWZ  .,-", 20,
             () => {
                 // Cancel
             },
             (string newName) => {
                 playerName = newName;
-
+                playerName = playerName.Replace(" ", string.Empty);
                 playerNameText.text = playerName;
 
                 OnNameChanged?.Invoke(this, EventArgs.Empty);

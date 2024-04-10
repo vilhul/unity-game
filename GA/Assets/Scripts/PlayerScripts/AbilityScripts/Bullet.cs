@@ -5,8 +5,8 @@ using Unity.Netcode.Components;
 public class Bullet : NetworkBehaviour
 {
     public int damage = 10;
-    public float bulletSpeed = 200f;
-
+    public float bulletSpeed = 300f;
+    public float destroyDelay = 15f;
     private Rigidbody rb;
 
     public override void OnNetworkSpawn()
@@ -14,17 +14,16 @@ public class Bullet : NetworkBehaviour
              rb = GetComponent<Rigidbody>();
             rb.isKinematic = false;
             rb.velocity = transform.forward * bulletSpeed;
+            if (IsServer) { Destroy(gameObject, destroyDelay); }
+            
     }
 
-   /* private void OnCollisionEnter(Collision collision)
+    private void OnCollisionEnter(Collision collision)
     {
         // Check if the bullet has authority
         if (!IsOwner)
             return;
         Debug.Log("destroy bullet");
-        // Check if the collision is with a player
-
-        // Destroy the bullet
         DestroyBullet();
     }
 
@@ -37,5 +36,5 @@ public class Bullet : NetworkBehaviour
         // Destroy the bullet on the server
         NetworkObject networkObject = GetComponent<NetworkObject>();
         networkObject.Despawn(true);
-    }*/
+    }
 }

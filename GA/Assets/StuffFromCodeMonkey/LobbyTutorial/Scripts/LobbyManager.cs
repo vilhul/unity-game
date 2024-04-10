@@ -53,7 +53,7 @@ public class LobbyManager : MonoBehaviour
     }
 
 
-    private float playersInLobby;
+    public float playersInLobby;
     private float heartbeatTimer;
     private float lobbyPollTimer;
     private float refreshLobbyListTimer = 5f;
@@ -464,7 +464,7 @@ public class LobbyManager : MonoBehaviour
                 });
 
                 joinedLobby = lobby;
-
+                
                 
 
 

@@ -14,6 +14,8 @@ public class GameManager : MonoBehaviour
     }
 
     public GameState gameState;
+    private bool isWinner;
+    private float playersAlive;
     public string currentWinner;
 
 
@@ -44,40 +46,54 @@ public class GameManager : MonoBehaviour
     {
         players = GameObject.FindGameObjectsWithTag("Player").ToList<GameObject>();
 
-
-
         switch(gameState) {
             case GameState.menu:
-
+                    
+                if (players.Count > 0)
+                {
+                    gameState = GameState.starting;
+                }
                 break;
             case GameState.starting:
-                break;
-            case GameState.playing:
-                Debug.Log(players.Count);
-                Debug.Log(inActivePlayers.Count);
-                foreach (GameObject player in players) {
-                    PlayerHealth playerHealth = player.GetComponent<PlayerHealth>();
-                    if(playerHealth.currentHealth.Value <= 0) {
-                        inActivePlayers.Add(player);
-                        player.SetActive(false);
-                    }
+
+                if (players.Count >= GameObject.Find("LobbyManager").GetComponent<LobbyManager>().playersInLobby)
+                {
+
+                     
+                    gameState = GameState.playing;
+
                 }
 
-                if(players.Count <= 1) {
-                    foreach (GameObject player in players) {
-                        //currentWinner = player;
-                        player.SetActive(false);
+                break;
+            case GameState.playing:
+                Debug.Log("Playing");
+                playersAlive = 0;
+                foreach (GameObject player in players)
+                {
+                    PlayerHealth playerScript = player.GetComponent<PlayerHealth>();
+                    if (playerScript != null)
+                    {
+                       if (playerScript.alive.Value) {
+                            playersAlive++;
+                        }
                     }
-                    gameState = GameState.ending; break;
+
+                    if (playersAlive == 1)
+                    {
+                        gameState = GameState.ending;
+
+                    }
                 }
 
                 break;
             case GameState.ending:
-                //Debug.Log(players[0]. + " won!");
 
+                Debug.Log("GameState.Ending");
 
                 break;
             case GameState.shopping:
+
+
                 break;
         }
     }

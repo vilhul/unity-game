@@ -5,11 +5,7 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
-    
-
-
-
-    public enum GameState {
+     public enum GameState {
         menu,
         starting,
         playing,

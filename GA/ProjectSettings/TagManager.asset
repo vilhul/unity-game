@@ -6,6 +6,8 @@ TagManager:
   tags:
   - Spectator Camera
   - Event
+  - HealthBar
+  - HealthPoints
   layers:
   - Default
   - TransparentFX

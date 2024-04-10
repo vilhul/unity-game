@@ -112,6 +112,13 @@ public class AbilityChipsHandler : MonoBehaviour
 
     public void LoadAbilityChips() {
 
+        //clear
+        foreach (Transform child in abilityChips.transform) {
+            Destroy(child.gameObject);
+        }
+        abilityChipInstances.Clear();
+
+        //load new
         foreach (AbilitySO ability in player.abilities) {
             GameObject abilityChipInstance = Instantiate(abilityChipPrefab, abilityChips.transform.position, abilityChips.transform.rotation);
             abilityChipInstances.Add(abilityChipInstance);

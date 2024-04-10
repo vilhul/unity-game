@@ -24,6 +24,8 @@ public class ShopManager : MonoBehaviour
         shopItems[2, 1] = 5;
         shopItems[2, 2] = 3;
         shopItems[2, 3] = 8;
+
+        canvas.SetActive(false);
     }
 
 

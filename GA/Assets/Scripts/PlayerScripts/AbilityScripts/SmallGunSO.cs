@@ -20,7 +20,7 @@ public class SmallGunSO : AbilitySO
             GameObject gunModelInstance = Instantiate(gunModel, player.transform.position, player.transform.rotation);
             gunModelInstance.transform.SetParent(player.transform.Find("Camera").Find("FirstPersonCamera"));
             gunModelInstance.transform.localPosition = new Vector3(0.769999981f, -0.289999992f, 0.980000019f);
-            gunModelInstance.transform.Rotate(0f, 173.800003f, 0f);
+            gunModelInstance.transform.localRotation = Quaternion.Euler(new Vector3(0f, 173.800003f, 0f));
             hasSpawnedGun = true;
         }
 

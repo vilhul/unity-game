@@ -43,7 +43,7 @@ public class GrapplingGunSO : AbilitySO
             GameObject gunModelInstance = Instantiate(grapplingGunModel, player.transform.position, player.transform.rotation);
             gunModelInstance.transform.SetParent(player.transform.Find("Camera").Find("FirstPersonCamera"));
             gunModelInstance.transform.localPosition = new Vector3(-1.47000003f, 0.209999993f, 1.50999999f);
-            gunModelInstance.transform.Rotate(new Vector3(0f, 0f, 336.980011f));
+            gunModelInstance.transform.localRotation = Quaternion.Euler(new Vector3(0f, 0f, 336.980011f));
             lineRenderer = player.lineRenderer;
 
             hasSpawnedGrapplingGun = true;

@@ -16,7 +16,7 @@ public class PlayerManager : NetworkBehaviour
     public List<AbilitySO> abilities = new List<AbilitySO>();
 
     public int chips = 50;
-    public GameObject shopCanvas;
+    public ShopManager shopManager;
     public bool isShopping = false;
 
     public KeyCode selectKey = KeyCode.G;
@@ -67,8 +67,7 @@ public class PlayerManager : NetworkBehaviour
 
         LoadAbilities();
 
-        shopCanvas = GameObject.Find("ShopCanvas");
-        shopCanvas.SetActive(false);
+        shopManager = GameObject.Find("ShopManager").GetComponent<ShopManager>();
     }
 
     private void Update() {
@@ -85,7 +84,7 @@ public class PlayerManager : NetworkBehaviour
 
 
         if(Input.GetKeyDown(KeyCode.P)) {
-           // OpenShop();
+            OpenShop();
         }
 
     }
@@ -107,16 +106,24 @@ public class PlayerManager : NetworkBehaviour
     public void OpenShop() {
         if (!IsOwner) return;
         isShopping = true;
-        shopCanvas.SetActive(true);
-        GameObject.Find("ShopManager").GetComponent<ShopManager>().Open();
+        shopManager.canvas.SetActive(true);
+        shopManager.Open();
     }
 
     public void LoadAbilities() {
+        //remove all models
+        
+        foreach (Transform child in firstPersonPlayerCamera.transform) {
+            if(child.gameObject.name != "AbilityChips") {
+                Destroy(child.gameObject);
+            }
+        }
 
         foreach (var abilitySO in abilities) {
 
             abilitySO.abilityCountdown = abilitySO.abilityCooldown;
 
+            //spawn models
             if (abilitySO.name == "Small Gun") {
                 SmallGunSO smallGunSO = (SmallGunSO)abilitySO;
                 smallGunSO.hasSpawnedGun = false;

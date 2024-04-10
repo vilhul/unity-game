@@ -77,7 +77,7 @@ public class GameManager : MonoBehaviour
 
                 break;
             case GameState.ending:
-                Debug.Log(players[0]. + " won!");
+                //Debug.Log(players[0]. + " won!");
 
 
                 break;

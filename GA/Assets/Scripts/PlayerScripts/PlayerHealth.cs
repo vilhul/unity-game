@@ -9,8 +9,8 @@ public class PlayerHealth : NetworkBehaviour
 {
     public GameObject spectatorCamera;
     public NetworkVariable<float> currentHealth = new NetworkVariable<float>();
-    public NetworkVariable<bool> alive = new NetworkVariable<bool>();
-    public Vector3 newPosition = new Vector3(0, 400, 0);
+    public NetworkVariable<bool> alive = new NetworkVariable<bool>(default, default, NetworkVariableWritePermission.Owner);
+    public Vector3 newPosition = new Vector3(0, 800, 0);
 
     private float maxHealth = 100f;
     private float healthPercentage;

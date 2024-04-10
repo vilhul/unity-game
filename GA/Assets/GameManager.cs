@@ -106,7 +106,7 @@ public class GameManager : MonoBehaviour
                     }
                 }
 
-                if (alivePlayers.Count == 1) {
+                if (alivePlayers.Count <= 1) {
                     alivePlayers[0].GetComponent<PlayerHealth>().alive.Value = false;
                     winnerAnnouncement.gameObject.SetActive(true);
                     endingCountdown.gameObject.SetActive(true);

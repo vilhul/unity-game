@@ -62,6 +62,7 @@ public class ShopManager : MonoBehaviour
                 player.GetComponent<PlayerManager>().abilities = playerManager.abilities;
                 player.GetComponent<PlayerManager>().chips = playerManager.chips;
                 player.GetComponent<PlayerManager>().isShopping = false;
+                player.GetComponent<PlayerManager>().isReady.Value = true;
                 player.GetComponent<PlayerManager>().LoadAbilities();
                 player.GetComponent<AbilityChipsHandler>().LoadAbilityChips();
             }

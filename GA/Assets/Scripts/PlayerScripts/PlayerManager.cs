@@ -7,6 +7,8 @@ using UnityEngine.TextCore.Text;
 
 public class PlayerManager : NetworkBehaviour
 {
+    public int score;
+
     public CharacterController playerCharacterController;
     public PlayerMovement2 playerMovement;
     public Camera playerCamera;
@@ -18,7 +20,8 @@ public class PlayerManager : NetworkBehaviour
     public int chips = 50;
     public ShopManager shopManager;
     public bool isShopping = false;
-
+    public NetworkVariable<bool> isReady = new NetworkVariable<bool>();
+    
     public KeyCode selectKey = KeyCode.G;
     public Vector3 spawnAreaCenter;
     public Vector3 spawnAreaSize;
@@ -72,21 +75,13 @@ public class PlayerManager : NetworkBehaviour
 
     private void Update() {
         if (!IsOwner) return;
+        if (GameManager.Instance.gameState != GameManager.GameState.playing) return;
         playerMovement.Movement();
         playerMovement.Jumping();
         playerMovement.ApplyGravity();
-        Debug.Log(GetComponent<PlayerHealth>().currentHealth.Value);
-
-        //handle abilities
-        foreach (var abilitySO in abilities) {
+        foreach (AbilitySO abilitySO in abilities) {
             abilitySO.HandleAbility(this.GetComponent<PlayerManager>());
         }
-
-
-        if(Input.GetKeyDown(KeyCode.P)) {
-            OpenShop();
-        }
-
     }
 
 
@@ -106,6 +101,7 @@ public class PlayerManager : NetworkBehaviour
     public void OpenShop() {
         if (!IsOwner) return;
         isShopping = true;
+        isReady.Value = false;
         shopManager.canvas.SetActive(true);
         shopManager.Open();
     }
@@ -119,7 +115,7 @@ public class PlayerManager : NetworkBehaviour
             }
         }
 
-        foreach (var abilitySO in abilities) {
+        foreach (AbilitySO abilitySO in abilities) {
 
             abilitySO.abilityCountdown = abilitySO.abilityCooldown;
 

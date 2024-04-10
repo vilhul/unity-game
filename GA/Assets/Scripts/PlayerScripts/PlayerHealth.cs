@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class PlayerHealth : NetworkBehaviour
 {
-    public GameObject mainCamera;
+    public GameObject spectatorCamera;
     public NetworkVariable<float> currentHealth = new NetworkVariable<float>();
     public NetworkVariable<bool> alive = new NetworkVariable<bool>();
     public Vector3 newPosition = new Vector3(0, 400, 0);
@@ -14,7 +14,7 @@ public class PlayerHealth : NetworkBehaviour
     {
         alive.Value = true;
         currentHealth.Value = 100;
-        mainCamera = GameObject.FindWithTag("Spectator Camera");
+        spectatorCamera = GameObject.FindWithTag("Spectator Camera");
     }
 
 
@@ -26,6 +26,7 @@ public class PlayerHealth : NetworkBehaviour
             Transform objTransform = GetComponent<Transform>();
             if (currentHealth.Value <= 0) {
                 alive.Value = false;
+                spectatorCamera.GetComponent<Camera>().depth = 50f;
                 objTransform.position = newPosition;
 
             } else

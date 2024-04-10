@@ -31,6 +31,7 @@ public class AbilityChipsHandler : MonoBehaviour
     }
 
     private void Update() {
+        
         for(int i = 0; i<abilityChipInstances.Count; i++) {
             AbilityChip abilityChipScript = abilityChipInstances[i].GetComponent<AbilityChip>();
             if (abilityChipScript == null) { return; }
@@ -44,7 +45,7 @@ public class AbilityChipsHandler : MonoBehaviour
         }
 
 
-
+        if (GameManager.Instance.gameState != GameManager.GameState.playing) return;
         switch(state) {
             case ChipState.Default:
                 for (int i = 0; i < abilityChipInstances.Count; i++) {

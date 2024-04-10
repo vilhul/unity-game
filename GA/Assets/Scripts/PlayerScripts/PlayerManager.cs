@@ -15,6 +15,9 @@ public class PlayerManager : NetworkBehaviour
 
     public List<AbilitySO> abilities = new List<AbilitySO>();
 
+    public int chips = 50;
+    public GameObject shopCanvas;
+    public bool isShopping = false;
 
     public KeyCode selectKey = KeyCode.G;
     public Vector3 spawnAreaCenter;
@@ -63,19 +66,10 @@ public class PlayerManager : NetworkBehaviour
         playerCharacterController = GetComponent<CharacterController>();
         lineRenderer = GetComponent<LineRenderer>();
 
-        foreach (var abilitySO in abilities) {
-            abilitySO.abilityCountdown = abilitySO.abilityCooldown;
+        LoadAbilities();
 
-            if(abilitySO.name == "Small Gun") {
-                SmallGunSO smallGunSO = (SmallGunSO)abilitySO;
-                smallGunSO.hasSpawnedGun = false;
-            }
-            if(abilitySO.name == "Grappling Gun") {
-                GrapplingGunSO grapplingGunSO = (GrapplingGunSO)abilitySO;
-                grapplingGunSO.hasSpawnedGrapplingGun = false;
-            }
-           Debug.Log(abilitySO.name);
-        };
+        shopCanvas = GameObject.Find("ShopCanvas");
+        shopCanvas.SetActive(false);
     }
 
     private void Update() {
@@ -89,6 +83,12 @@ public class PlayerManager : NetworkBehaviour
         foreach (var abilitySO in abilities) {
             abilitySO.HandleAbility(this.GetComponent<PlayerManager>());
         }
+
+
+        if(Input.GetKeyDown(KeyCode.P)) {
+           // OpenShop();
+        }
+
     }
 
 
@@ -102,5 +102,32 @@ public class PlayerManager : NetworkBehaviour
             GetComponent<PlayerHealth>().currentHealth.Value -= 10;
             Debug.Log("tests");
         }
+    }
+
+
+    public void OpenShop() {
+        if (!IsOwner) return;
+        isShopping = true;
+        shopCanvas.SetActive(true);
+        GameObject.Find("ShopManager").GetComponent<ShopManager>().Open();
+    }
+
+    public void LoadAbilities() {
+
+        foreach (var abilitySO in abilities) {
+
+            abilitySO.abilityCountdown = abilitySO.abilityCooldown;
+
+            if (abilitySO.name == "Small Gun") {
+                SmallGunSO smallGunSO = (SmallGunSO)abilitySO;
+                smallGunSO.hasSpawnedGun = false;
+            }
+            if (abilitySO.name == "Grappling Gun") {
+                GrapplingGunSO grapplingGunSO = (GrapplingGunSO)abilitySO;
+                grapplingGunSO.hasSpawnedGrapplingGun = false;
+            }
+            Debug.Log(abilitySO.name);
+        };
+
     }
 }

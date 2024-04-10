@@ -27,12 +27,7 @@ public class AbilityChipsHandler : MonoBehaviour
     private void Start() {
         
         player = GetComponent<PlayerManager>();
-        foreach (AbilitySO ability in player.abilities) {
-            GameObject abilityChipInstance = Instantiate(abilityChipPrefab, abilityChips.transform.position, abilityChips.transform.rotation);
-            abilityChipInstances.Add(abilityChipInstance);
-            AbilityChip abilityChipScript = abilityChipInstance.GetComponent<AbilityChip>();
-            abilityChipScript.Setup(abilityChips, ability);
-        }
+        LoadAbilityChips();
     }
 
     private void Update() {
@@ -112,6 +107,16 @@ public class AbilityChipsHandler : MonoBehaviour
                     hasScrolled = false;
                 }
                 break;
+        }
+    }
+
+    public void LoadAbilityChips() {
+
+        foreach (AbilitySO ability in player.abilities) {
+            GameObject abilityChipInstance = Instantiate(abilityChipPrefab, abilityChips.transform.position, abilityChips.transform.rotation);
+            abilityChipInstances.Add(abilityChipInstance);
+            AbilityChip abilityChipScript = abilityChipInstance.GetComponent<AbilityChip>();
+            abilityChipScript.Setup(abilityChips, ability);
         }
     }
 }

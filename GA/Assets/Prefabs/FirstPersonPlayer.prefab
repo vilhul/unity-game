@@ -145,7 +145,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 6209954812446935788}
+  m_Father: {fileID: 5602895646542224295}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &8829620814539060895
 MonoBehaviour:
@@ -199,7 +199,6 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 3809387057222625328}
   - {fileID: 5602895646542224295}
   - {fileID: 5758785299331462337}
   - {fileID: 6148738091574707339}
@@ -244,7 +243,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  GlobalObjectIdHash: 3481775713
+  GlobalObjectIdHash: 3822036137
   AlwaysReplicateAsRoot: 0
   SynchronizeTransform: 1
   ActiveSceneSynchronization: 0
@@ -266,7 +265,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerCharacterController: {fileID: 220001649542917960}
   playerMovement: {fileID: 0}
-  playerCamera: {fileID: 0}
+  playerCamera: {fileID: 2232705500642202294}
+  firstPersonPlayerCamera: {fileID: 5783959687270670058}
   lineRenderer: {fileID: 0}
   abilities:
   - {fileID: 11400000, guid: ae8818adc5331df489d2f6e10b38ca45, type: 2}
@@ -274,6 +274,8 @@ MonoBehaviour:
   - {fileID: 11400000, guid: f19c85f2275986146b356323e27781d6, type: 2}
   - {fileID: 11400000, guid: b65374d858aff9040abf9fc50a09b7ea, type: 2}
   selectKey: 103
+  spawnAreaCenter: {x: 0, y: 5, z: 0}
+  spawnAreaSize: {x: 100, y: 0, z: 100}
 --- !u!114 &3441028173602114808
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -608,6 +610,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
+  - {fileID: 3809387057222625328}
   - {fileID: 636115951782118952}
   m_Father: {fileID: 6209954812446935788}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}

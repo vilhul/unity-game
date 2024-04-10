@@ -13,21 +13,20 @@ public class BulletSpawn : NetworkBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Mouse0))
+        if (Input.GetKeyDown(KeyCode.Mouse0) && IsOwner)
         {
-            Debug.Log("test");
             SpawnBulletServerRpc(InistialTransform.position, InistialTransform.rotation);
 
         }
     }
 
-    [ServerRpc]
+    [ServerRpc(RequireOwnership = false)]
 
-    private void SpawnBulletServerRpc(Vector3 position, Quaternion rotation)
+    private void SpawnBulletServerRpc(Vector3 position, Quaternion rotation,ServerRpcParams serverRpcParams = default)
     {
         GameObject InstansiatedBullet = Instantiate(bullet, position, rotation);
 
-        InstansiatedBullet.GetComponent<NetworkObject>().Spawn();
+        InstansiatedBullet.GetComponent<NetworkObject>().SpawnWithOwnership(serverRpcParams.Receive.SenderClientId);
 
     }
 }

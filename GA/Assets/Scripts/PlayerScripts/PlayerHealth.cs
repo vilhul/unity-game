@@ -5,16 +5,24 @@ using UnityEngine;
 
 public class PlayerHealth : NetworkBehaviour
 {
-    public float currentHealth = 100;
+    public NetworkVariable<float> currentHealth = new NetworkVariable<float>();
+    public Vector3 newPosition = new Vector3(0, 100, 0);
 
-
-    public void TakeDamage(float damage)
+    public override void OnNetworkSpawn()
+    {
+        currentHealth.Value = 100;
+    }
+    public void Update()
     {
         if (IsOwner)
         {
-            currentHealth -= damage; // Reduce health by the specified damage amount
+            Transform objTransform = GetComponent<Transform>();
+            if (currentHealth.Value <= 0) { 
+                
+                objTransform.position = newPosition;
+
+            }
 
         }
-
     }
 }

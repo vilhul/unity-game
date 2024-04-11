@@ -23,13 +23,5 @@ public class SmallGunSO : AbilitySO
             gunModelInstance.transform.localRotation = Quaternion.Euler(new Vector3(0f, 173.800003f, 0f));
             hasSpawnedGun = true;
         }
-
-        if(Input.GetKeyDown(KeyCode.Mouse1)) {
-
-            GameObject bulletInstance = Instantiate(bullet, player.transform.Find("Camera").position + player.transform.Find("Camera").forward, player.transform.Find("Camera").rotation);
-            Bullet bulletScript = bulletInstance.GetComponent<Bullet>();
-            bulletScript.bulletSpeed = 20f;
-
-        }
     }
 }

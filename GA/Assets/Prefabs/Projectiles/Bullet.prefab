@@ -145,7 +145,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   damage: 10
-  bulletSpeed: 20
+  bulletSpeed: 50
   destroyDelay: 15
 --- !u!54 &8746319026791474781
 Rigidbody:

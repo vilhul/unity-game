@@ -63,7 +63,7 @@ public class PlayerManager : NetworkBehaviour
         bool foundValidSpawn = false;
 
         // Try to find a valid spawn position within the spawn area
-        int maxAttempts = 10; // Maximum number of attempts to find a valid spawn position
+        int maxAttempts = 40; // Maximum number of attempts to find a valid spawn position
         int attempts = 0;
         do
         {

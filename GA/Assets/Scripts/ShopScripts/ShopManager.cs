@@ -13,7 +13,8 @@ public class ShopManager : MonoBehaviour
     public GameObject canvas;
     public PlayerManager playerManager;
 
-    private void Start() {
+    private void Start()
+    {
 
         //ID's
         shopItems[1, 1] = 1;
@@ -32,21 +33,25 @@ public class ShopManager : MonoBehaviour
     public void Open()
     {
         Cursor.lockState = CursorLockMode.Confined;
-        foreach (GameObject player in GameObject.FindGameObjectsWithTag("Player")) {
+        foreach (GameObject player in GameObject.FindGameObjectsWithTag("Player"))
+        {
             PlayerManager playerScript = player.GetComponent<PlayerManager>();
-            if(playerScript.isShopping) {
+            if (playerScript.isShopping)
+            {
                 playerManager = playerScript;
             }
         }
         chipsTXT.text = "Chips: " + playerManager.chips.ToString();
     }
 
-    
-    
-    public void Buy() {
+
+
+    public void Buy()
+    {
         GameObject ButtonRef = GameObject.FindGameObjectWithTag("Event").GetComponent<EventSystem>().currentSelectedGameObject;
 
-        if(playerManager.chips >= shopItems[2, ButtonRef.GetComponent<ButtonInfo>().ItemID]) {
+        if (playerManager.chips >= shopItems[2, ButtonRef.GetComponent<ButtonInfo>().ItemID])
+        {
             playerManager.chips -= shopItems[2, ButtonRef.GetComponent<ButtonInfo>().ItemID];
             playerManager.abilities.Add(ButtonRef.GetComponent<ButtonInfo>().ability);
             ButtonRef.SetActive(false);
@@ -55,18 +60,17 @@ public class ShopManager : MonoBehaviour
         }
     }
 
-    public void Ready() {
-        foreach (GameObject player in GameObject.FindGameObjectsWithTag("Player")) {
+    public void Ready()
+    {
+        foreach (GameObject player in GameObject.FindGameObjectsWithTag("Player"))
+        {
             PlayerManager playerScript = player.GetComponent<PlayerManager>();
-            if (playerScript.isShopping) {
+            if (playerScript.isShopping)
+            {
                 player.GetComponent<PlayerManager>().abilities = playerManager.abilities;
                 player.GetComponent<PlayerManager>().chips = playerManager.chips;
                 player.GetComponent<PlayerManager>().isShopping = false;
-<<<<<<< Updated upstream
                 //player.GetComponent<PlayerManager>().UpdateIsReady();
-=======
-                player.GetComponent<PlayerManager>().UpdateIsReady();
->>>>>>> Stashed changes
                 player.GetComponent<PlayerManager>().LoadAbilities();
                 player.GetComponent<AbilityChipsHandler>().LoadAbilityChips();
             }
@@ -78,6 +82,6 @@ public class ShopManager : MonoBehaviour
         //kod för att invänta de andra spelararna på något smidigt sätt
     }
 
-    
+
 
 }

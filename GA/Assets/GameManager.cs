@@ -7,7 +7,8 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
-     public enum GameState {
+    public enum GameState
+    {
         menu,
         loading,
         starting,
@@ -39,13 +40,17 @@ public class GameManager : MonoBehaviour
 
     public static GameManager Instance;
 
-    private void Awake() {
-        if (Instance == null) {
+    private void Awake()
+    {
+        if (Instance == null)
+        {
             Instance = this;
-        } else {
+        }
+        else
+        {
             Destroy(gameObject);
         }
-        
+
         startingCountdown.gameObject.SetActive(false);
         endingCountdown.gameObject.SetActive(false);
         winnerAnnouncement.gameObject.SetActive(false);
@@ -59,9 +64,10 @@ public class GameManager : MonoBehaviour
     {
         players = GameObject.FindGameObjectsWithTag("Player").ToList<GameObject>();
 
-        switch(gameState) {
+        switch (gameState)
+        {
             case GameState.menu:
-                    
+
                 if (players.Count > 0)
                 {
                     gameState = GameState.loading;
@@ -72,7 +78,7 @@ public class GameManager : MonoBehaviour
                 if (players.Count >= GameObject.Find("LobbyManager").GetComponent<LobbyManager>().playersInLobby)
                 {
 
-                     
+
                     gameState = GameState.starting;
                     startingCountdown.gameObject.SetActive(true);
                     firstPersonCanvas.SetActive(true);
@@ -83,14 +89,16 @@ public class GameManager : MonoBehaviour
                 break;
             case GameState.starting:
                 spectatorCamera.depth = -50f;
-                startingCountdown.text = Mathf.Ceil(startingTimer-1).ToString();
+                startingCountdown.text = Mathf.Ceil(startingTimer - 1).ToString();
                 startingCountdown.fontSize = 200f;
                 startingTimer -= Time.deltaTime;
-                if(startingTimer <= 1f) {
+                if (startingTimer <= 1f)
+                {
                     startingCountdown.text = "Fight!";
                     startingCountdown.fontSize = 300f;
                 }
-                if (startingTimer <= 0f) {
+                if (startingTimer <= 0f)
+                {
                     gameState = GameState.playing;
                     startingCountdown.gameObject.SetActive(false);
                     alivePlayersText.gameObject.SetActive(true);
@@ -106,16 +114,19 @@ public class GameManager : MonoBehaviour
                 List<GameObject> playersToRemove = new List<GameObject>();
 
                 // Iterate over alivePlayers to check player health
-                foreach (GameObject player in alivePlayers) {
+                foreach (GameObject player in alivePlayers)
+                {
                     Debug.Log(player.GetComponent<PlayerHealth>().alive.Value);
-                    if (!player.GetComponent<PlayerHealth>().alive.Value) {
+                    if (!player.GetComponent<PlayerHealth>().alive.Value)
+                    {
                         // Add the player to the list of players to remove
                         playersToRemove.Add(player);
                     }
                 }
 
                 // Remove the players that need to be removed
-                foreach (GameObject playerToRemove in playersToRemove) {
+                foreach (GameObject playerToRemove in playersToRemove)
+                {
                     alivePlayers.Remove(playerToRemove);
                 }
 
@@ -130,32 +141,16 @@ public class GameManager : MonoBehaviour
                 /*
                 alivePlayersText.text = "Alive players: " + alivePlayers.Count;
 
-                // Create a list to hold the players that should be removed
-                List<GameObject> playersToRemove = new List<GameObject>();
-
-                // Iterate over alivePlayers to check player health
-                foreach (GameObject player in alivePlayers)
-                {
-
-                    if (!player.GetComponent<PlayerHealth>().alive.Value)
-                    {
-                        // Add the player to the list of players to remove
-                        playersToRemove.Add(player);
+                foreach(GameObject player in alivePlayers) {
+                    Debug.Log(player.GetComponent<PlayerHealth>().alive.Value);
+                    if(!player.GetComponent<PlayerHealth>().alive.Value) {
+                        alivePlayers.Remove(player);
                     }
                 }*/
 
-<<<<<<< Updated upstream
-                if (alivePlayers.Count == 1) {
-//                    alivePlayers[0].GetComponent<PlayerHealth>().alive.Value = false;
-=======
-                // Remove the players that need to be removed
-                foreach (GameObject playerToRemove in playersToRemove)
+                if (alivePlayers.Count == 1)
                 {
-                    alivePlayers.Remove(playerToRemove);
-                }
-
-                if (alivePlayers.Count == 1) {
->>>>>>> Stashed changes
+                    //                    alivePlayers[0].GetComponent<PlayerHealth>().alive.Value = false;
                     winnerAnnouncement.gameObject.SetActive(true);
                     endingCountdown.gameObject.SetActive(true);
                     alivePlayersText.gameObject.SetActive(false);
@@ -169,15 +164,20 @@ public class GameManager : MonoBehaviour
                 winnerAnnouncement.text = "Player won!";
                 endingCountdown.text = Mathf.Ceil(endingTimer).ToString();
                 endingTimer -= Time.deltaTime;
-                if(endingTimer <= 0f) {
+                if (endingTimer <= 0f)
+                {
                     gameState = GameState.shopping;
                     spectatorCamera.depth = 50f;
                     shoppingTimer = 9f;
                     winnerAnnouncement.gameObject.SetActive(false);
-                    foreach(GameObject player in players) {
-                        if(player == alivePlayers[0]) {
+                    foreach (GameObject player in players)
+                    {
+                        if (player == alivePlayers[0])
+                        {
                             player.GetComponent<PlayerManager>().chips += 3;
-                        } else {
+                        }
+                        else
+                        {
                             player.GetComponent<PlayerManager>().chips += 1;
                         }
 
@@ -187,30 +187,10 @@ public class GameManager : MonoBehaviour
 
                 break;
             case GameState.shopping:
-<<<<<<< Updated upstream
                 endingCountdown.text = Mathf.Ceil(shoppingTimer).ToString();
                 shoppingTimer -= Time.deltaTime;
-                if(shoppingTimer <= 0f) {
-=======
-                List<GameObject> playersToRemoveShopping = new List<GameObject>();
-
-                // Iterate over the shoppingPlayers list
-                foreach (GameObject player in shoppingPlayers)
+                if (shoppingTimer <= 0f)
                 {
-                    if (player.GetComponent<PlayerManager>().isReady.Value)
-                    {
-                        // Add the player to the list of players to remove
-                        playersToRemoveShopping.Add(player);
-                    }
-                }
-
-                // Remove the players from the shoppingPlayers list outside of the foreach loop
-                foreach (GameObject playerToRemove in playersToRemoveShopping)
-                {
-                    shoppingPlayers.Remove(playerToRemove);
-                }
-                if (shoppingPlayers.Count == 0) {
->>>>>>> Stashed changes
                     //spawna på spelare på random positioner igen
 
 
@@ -220,7 +200,8 @@ public class GameManager : MonoBehaviour
                     startingTimer = 6f;
                     gameState = GameState.starting;
                     shopManager.Ready();
-                    foreach (GameObject player in players) {
+                    foreach (GameObject player in players)
+                    {
                         player.GetComponent<PlayerHealth>().currentHealth.Value = 100f;
                         player.GetComponent<PlayerHealth>().alive.Value = true;
                     }

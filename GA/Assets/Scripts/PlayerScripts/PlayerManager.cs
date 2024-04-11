@@ -164,9 +164,7 @@ public class PlayerManager : NetworkBehaviour
 
     }
 
-<<<<<<< Updated upstream
 
-=======
     public void UpdateIsReady()
     {
         if (IsServer)
@@ -174,5 +172,4 @@ public class PlayerManager : NetworkBehaviour
             isReady.Value = true;
         }
     }
->>>>>>> Stashed changes
 }

@@ -26,10 +26,12 @@ public class GameManager : MonoBehaviour
 
     private float startingTimer;
     private float endingTimer;
+    private float shoppingTimer;
     [SerializeField] private TMP_Text startingCountdown;
     [SerializeField] private TMP_Text endingCountdown;
     [SerializeField] private TMP_Text winnerAnnouncement;
     [SerializeField] private TMP_Text alivePlayersText;
+    [SerializeField] private ShopManager shopManager;
 
 
     List<GameObject> inActivePlayers = new List<GameObject>();
@@ -97,6 +99,35 @@ public class GameManager : MonoBehaviour
 
                 break;
             case GameState.playing:
+
+                alivePlayersText.text = "Alive players: " + alivePlayers.Count;
+
+                // Create a list to hold the players that should be removed
+                List<GameObject> playersToRemove = new List<GameObject>();
+
+                // Iterate over alivePlayers to check player health
+                foreach (GameObject player in alivePlayers) {
+                    Debug.Log(player.GetComponent<PlayerHealth>().alive.Value);
+                    if (!player.GetComponent<PlayerHealth>().alive.Value) {
+                        // Add the player to the list of players to remove
+                        playersToRemove.Add(player);
+                    }
+                }
+
+                // Remove the players that need to be removed
+                foreach (GameObject playerToRemove in playersToRemove) {
+                    alivePlayers.Remove(playerToRemove);
+                }
+
+
+
+
+
+
+
+
+
+                /*
                 alivePlayersText.text = "Alive players: " + alivePlayers.Count;
 
                 foreach(GameObject player in alivePlayers) {
@@ -104,10 +135,10 @@ public class GameManager : MonoBehaviour
                     if(!player.GetComponent<PlayerHealth>().alive.Value) {
                         alivePlayers.Remove(player);
                     }
-                }
+                }*/
 
-                if (alivePlayers.Count <= 1) {
-                    alivePlayers[0].GetComponent<PlayerHealth>().alive.Value = false;
+                if (alivePlayers.Count == 1) {
+//                    alivePlayers[0].GetComponent<PlayerHealth>().alive.Value = false;
                     winnerAnnouncement.gameObject.SetActive(true);
                     endingCountdown.gameObject.SetActive(true);
                     alivePlayersText.gameObject.SetActive(false);
@@ -118,38 +149,44 @@ public class GameManager : MonoBehaviour
                 break;
             case GameState.ending:
 
-                winnerAnnouncement.text = players[0].name + " won!";
+                winnerAnnouncement.text = "Player won!";
                 endingCountdown.text = Mathf.Ceil(endingTimer).ToString();
                 endingTimer -= Time.deltaTime;
                 if(endingTimer <= 0f) {
                     gameState = GameState.shopping;
                     spectatorCamera.depth = 50f;
+                    shoppingTimer = 9f;
                     winnerAnnouncement.gameObject.SetActive(false);
-                    endingCountdown.gameObject.SetActive(false);
-                    shoppingPlayers = players;
                     foreach(GameObject player in players) {
+                        if(player == alivePlayers[0]) {
+                            player.GetComponent<PlayerManager>().chips += 3;
+                        } else {
+                            player.GetComponent<PlayerManager>().chips += 1;
+                        }
+
                         player.GetComponent<PlayerManager>().OpenShop();
                     }
                 }
 
                 break;
             case GameState.shopping:
-                foreach(GameObject player in shoppingPlayers) {
-                    if(player.GetComponent<PlayerManager>().isReady.Value) {
-                        shoppingPlayers.Remove(player);
-                    }
-                }
-                if(shoppingPlayers.Count == 0) {
+                endingCountdown.text = Mathf.Ceil(shoppingTimer).ToString();
+                shoppingTimer -= Time.deltaTime;
+                if(shoppingTimer <= 0f) {
                     //spawna på spelare på random positioner igen
 
+
+
+                    endingCountdown.gameObject.SetActive(false);
                     startingCountdown.gameObject.SetActive(true);
                     startingTimer = 6f;
                     gameState = GameState.starting;
-                    foreach(GameObject player in players) {
+                    shopManager.Ready();
+                    foreach (GameObject player in players) {
+                        player.GetComponent<PlayerHealth>().currentHealth.Value = 100f;
                         player.GetComponent<PlayerHealth>().alive.Value = true;
                     }
                 }
-
                 break;
         }
     }

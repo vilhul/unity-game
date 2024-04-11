@@ -14349,7 +14349,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &401019381
 RectTransform:
   m_ObjectHideFlags: 0
@@ -51602,6 +51602,7 @@ MonoBehaviour:
   endingCountdown: {fileID: 932309796}
   winnerAnnouncement: {fileID: 665331677}
   alivePlayersText: {fileID: 1221871865}
+  shopManager: {fileID: 1575215488}
 --- !u!4 &1219950410
 Transform:
   m_ObjectHideFlags: 0

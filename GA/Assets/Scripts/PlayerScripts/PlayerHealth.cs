@@ -9,7 +9,7 @@ public class PlayerHealth : NetworkBehaviour
 {
     public GameObject spectatorCamera;
     public NetworkVariable<float> currentHealth = new NetworkVariable<float>();
-    public NetworkVariable<bool> alive = new NetworkVariable<bool>(default, default, NetworkVariableWritePermission.Owner);
+    public NetworkVariable<bool> alive = new NetworkVariable<bool>();
     public Vector3 newPosition = new Vector3(0, 800, 0);
 
     private float maxHealth = 100f;
@@ -26,45 +26,33 @@ public class PlayerHealth : NetworkBehaviour
         alive.Value = true;
         currentHealth.Value = 100;
         spectatorCamera = GameObject.FindWithTag("Spectator Camera");
-        if (IsOwner)
-        {
-            healthBarImage.enabled = true;
-            healthText.enabled = true;
-        } else
-        {
-
-            healthBarImage.enabled = false;
-            healthText.enabled = false;
-        }
 
 
     }
 
 
-    
-    public void Update()
-    {
-        if (IsOwner)
-        {
-            LimitHealth();
-            UpdateHealthBar();
-            newWidth = maxWidth * healthPercentage;
-            ChangeWidth(newWidth);
-            UpdateHealthText();
 
+    public void Update() {
 
-            Transform objTransform = GetComponent<Transform>();
-            if (currentHealth.Value <= 0) {
+        LimitHealth();
+        UpdateHealthBar();
+        newWidth = maxWidth * healthPercentage;
+        ChangeWidth(newWidth);
+        UpdateHealthText();
+
+        if (GameManager.Instance.gameState != GameManager.GameState.playing) return;
+        Transform objTransform = GetComponent<Transform>();
+        if (currentHealth.Value <= 0) {
+            if (IsServer) {
                 alive.Value = false;
-                spectatorCamera.GetComponent<Camera>().depth = 50f;
-                objTransform.position = newPosition;
-
-            } else
-            {
-
             }
 
+            spectatorCamera.GetComponent<Camera>().depth = 50f;
+            objTransform.position = newPosition;
+
         }
+
+
     }
 
     void UpdateHealthBar()

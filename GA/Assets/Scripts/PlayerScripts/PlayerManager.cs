@@ -7,7 +7,7 @@ using UnityEngine.TextCore.Text;
 
 public class PlayerManager : NetworkBehaviour
 {
-    public int score;
+    public string playerName;
 
     public CharacterController playerCharacterController;
     public PlayerMovement2 playerMovement;
@@ -17,7 +17,7 @@ public class PlayerManager : NetworkBehaviour
 
     public List<AbilitySO> abilities = new List<AbilitySO>();
 
-    public int chips = 50;
+    public int chips = 0;
     public ShopManager shopManager;
     public bool isShopping = false;
     public NetworkVariable<bool> isReady = new NetworkVariable<bool>();
@@ -30,7 +30,6 @@ public class PlayerManager : NetworkBehaviour
     {
         if (IsOwner)
         {
-
             firstPersonPlayerCamera.enabled = true;
             firstPersonPlayerCamera.depth = 1;
             playerCamera = GetComponentInChildren<Camera>();
@@ -131,4 +130,6 @@ public class PlayerManager : NetworkBehaviour
         };
 
     }
+
+
 }

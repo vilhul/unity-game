@@ -26,11 +26,15 @@ public class PlayerHealth : NetworkBehaviour
         alive.Value = true;
         currentHealth.Value = 100;
         spectatorCamera = GameObject.FindWithTag("Spectator Camera");
+<<<<<<< Updated upstream
 
+=======
+>>>>>>> Stashed changes
 
     }
 
 
+<<<<<<< Updated upstream
 
     public void Update() {
 
@@ -53,6 +57,31 @@ public class PlayerHealth : NetworkBehaviour
         }
 
 
+=======
+    
+    public void Update()
+    {
+        
+            LimitHealth();
+            UpdateHealthBar();
+            newWidth = maxWidth * healthPercentage;
+            ChangeWidth(newWidth);
+            UpdateHealthText();
+
+            if (GameManager.Instance.gameState != GameManager.GameState.playing) return;
+            Transform objTransform = GetComponent<Transform>();
+            if (currentHealth.Value <= 0) {
+                if (IsServer){
+                    alive.Value = false;
+                }
+
+                spectatorCamera.GetComponent<Camera>().depth = 50f;
+                objTransform.position = newPosition;
+
+            }
+
+        
+>>>>>>> Stashed changes
     }
 
     void UpdateHealthBar()

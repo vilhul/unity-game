@@ -25,6 +25,7 @@ public class PlayerManager : NetworkBehaviour
     public KeyCode selectKey = KeyCode.G;
     public Vector3 spawnAreaCenter;
     public Vector3 spawnAreaSize;
+    public LayerMask obstacleLayer;
 
     public override void OnNetworkSpawn()
     {
@@ -44,21 +45,54 @@ public class PlayerManager : NetworkBehaviour
         }
         if (IsLocalPlayer)
         {
-            Vector3 randomSpawnPosition = GetRandomSpawnPosition();
-            transform.position = randomSpawnPosition;
+            SpawnPlayer();
+
         }
 
     }
 
+    private void SpawnPlayer()
+    {
+        Vector3 randomSpawnPosition = GetRandomSpawnPosition();
+        transform.position = randomSpawnPosition;
+    }
 
     private Vector3 GetRandomSpawnPosition()
     {
-        float randomX = Random.Range(spawnAreaCenter.x - spawnAreaSize.x / 2f, spawnAreaCenter.x + spawnAreaSize.x / 2f);
-        float randomY = Random.Range(spawnAreaCenter.y - spawnAreaSize.y / 2f, spawnAreaCenter.y + spawnAreaSize.y / 2f);
-        float randomZ = Random.Range(spawnAreaCenter.z - spawnAreaSize.z / 2f, spawnAreaCenter.z + spawnAreaSize.z / 2f);
+        Vector3 randomPosition;
+        bool foundValidSpawn = false;
 
-        return new Vector3(randomX, randomY, randomZ);
+        // Try to find a valid spawn position within the spawn area
+        int maxAttempts = 10; // Maximum number of attempts to find a valid spawn position
+        int attempts = 0;
+        do
+        {
+            float randomX = Random.Range(spawnAreaCenter.x - spawnAreaSize.x / 2f, spawnAreaCenter.x + spawnAreaSize.x / 2f);
+            float randomY = Random.Range(spawnAreaCenter.y - spawnAreaSize.y / 2f, spawnAreaCenter.y + spawnAreaSize.y / 2f);
+            float randomZ = Random.Range(spawnAreaCenter.z - spawnAreaSize.z / 2f, spawnAreaCenter.z + spawnAreaSize.z / 2f);
+
+            randomPosition = new Vector3(randomX, randomY, randomZ);
+
+            // Check if there are any obstacles at the random position
+            if (!Physics.CheckBox(randomPosition, Vector3.one * 0.5f, Quaternion.identity, obstacleLayer) &&
+                randomZ > -30 && randomZ < 30)
+            {
+                foundValidSpawn = true;
+            }
+
+            attempts++;
+        } while (!foundValidSpawn && attempts < maxAttempts);
+
+        // If no valid spawn position was found, use the center of the spawn area
+        if (!foundValidSpawn)
+        {
+            Debug.LogWarning("Failed to find a valid spawn position. Spawning at the center of the spawn area.");
+            randomPosition = spawnAreaCenter;
+        }
+
+        return randomPosition;
     }
+
 
     private void Start() {
         if (!IsOwner) return;
@@ -91,7 +125,6 @@ public class PlayerManager : NetworkBehaviour
         {
             
             GetComponent<PlayerHealth>().currentHealth.Value -= 10;
-            Debug.Log("tests");
         }
     }
 
@@ -131,5 +164,15 @@ public class PlayerManager : NetworkBehaviour
 
     }
 
+<<<<<<< Updated upstream
 
+=======
+    public void UpdateIsReady()
+    {
+        if (IsServer)
+        {
+            isReady.Value = true;
+        }
+    }
+>>>>>>> Stashed changes
 }

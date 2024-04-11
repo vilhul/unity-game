@@ -519,6 +519,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 862122f9a15284a4d93c5b1c1a878f82, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playerName: 
   playerCharacterController: {fileID: 220001649542917960}
   playerMovement: {fileID: 0}
   playerCamera: {fileID: 2232705500642202294}
@@ -526,9 +527,11 @@ MonoBehaviour:
   lineRenderer: {fileID: 0}
   abilities:
   - {fileID: 11400000, guid: b65374d858aff9040abf9fc50a09b7ea, type: 2}
-  chips: 50
+  chips: 0
   shopManager: {fileID: 0}
   isShopping: 0
+  isReady:
+    m_InternalValue: 0
   selectKey: 103
   spawnAreaCenter: {x: 0, y: 5, z: 0}
   spawnAreaSize: {x: 100, y: 0, z: 100}
@@ -719,7 +722,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fd0704b65a66ea34c8c83675ddb7d34b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mainCamera: {fileID: 0}
+  spectatorCamera: {fileID: 0}
   currentHealth:
     m_InternalValue: 0
   alive:

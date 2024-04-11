@@ -20,4 +20,4 @@ MonoBehaviour:
   abilityCooldown: 5
   abilityCountdown: 5
   dashKey: 102
-  dashRange: 11
+  dashRange: 15

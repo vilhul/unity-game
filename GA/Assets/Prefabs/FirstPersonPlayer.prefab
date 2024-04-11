@@ -500,7 +500,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  GlobalObjectIdHash: 3481775713
+  GlobalObjectIdHash: 2788032759
   AlwaysReplicateAsRoot: 0
   SynchronizeTransform: 1
   ActiveSceneSynchronization: 0
@@ -535,10 +535,10 @@ MonoBehaviour:
     m_InternalValue: 0
   selectKey: 103
   spawnAreaCenter: {x: 0, y: 5, z: 0}
-  spawnAreaSize: {x: 200, y: 0, z: 200}
+  spawnAreaSize: {x: 100, y: 0, z: 100}
   obstacleLayer:
     serializedVersion: 2
-    m_Bits: 1024
+    m_Bits: 0
 --- !u!114 &3441028173602114808
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -202,6 +202,7 @@ public class GameManager : MonoBehaviour
                     shopManager.Ready();
                     foreach (GameObject player in players)
                     {
+                        player.GetComponent<PlayerManager>().SpawnPlayer();
                         player.GetComponent<PlayerHealth>().currentHealth.Value = 100f;
                         player.GetComponent<PlayerHealth>().alive.Value = true;
                     }

@@ -51,7 +51,7 @@ public class PlayerManager : NetworkBehaviour
 
     }
 
-    private void SpawnPlayer()
+    public void SpawnPlayer()
     {
         Vector3 randomSpawnPosition = GetRandomSpawnPosition();
         transform.position = randomSpawnPosition;

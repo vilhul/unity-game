@@ -7,7 +7,7 @@ public class DashSO : AbilitySO
 {
 
     public KeyCode dashKey = KeyCode.F;
-    public float dashRange = 11f;
+    public float dashRange = 15f;
 
     enum DashState {
         ready,

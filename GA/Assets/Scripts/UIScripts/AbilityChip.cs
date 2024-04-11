@@ -71,11 +71,3 @@ public class AbilityChip : MonoBehaviour {
         }
     }
 }
-
-
-// x=0.55 max/min
-// y=-0.28
-// z=0.2
-// steg = 0.55/3
-// rotmax = 15
-// rot = x*rotmax/xmax

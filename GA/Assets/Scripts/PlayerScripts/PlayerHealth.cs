@@ -12,25 +12,17 @@ public class PlayerHealth : NetworkBehaviour
     public Vector3 newPosition = new Vector3(0, 800, 0);
 
 
-
-
     public override void OnNetworkSpawn()
     {
-
         alive.Value = true;
         currentHealth.Value = 100;
         spectatorCamera = GameObject.FindWithTag("Spectator Camera");
-
     }
-
 
 
 
     public void Update()
     {
-
-
-
         if (GameManager.Instance.gameState != GameManager.GameState.playing) return;
         Transform objTransform = GetComponent<Transform>();
         if (currentHealth.Value <= 0)
@@ -42,14 +34,6 @@ public class PlayerHealth : NetworkBehaviour
 
             spectatorCamera.GetComponent<Camera>().depth = 50f;
             objTransform.position = newPosition;
-
         }
-
-
     }
-
-
-
-
-
 }

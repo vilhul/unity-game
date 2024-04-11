@@ -6,7 +6,7 @@ using UnityEngine;
 using UnityEngine.InputSystem.XR;
 
 
-public class PlayerMovement2 : NetworkBehaviour
+public class PlayerMovement : NetworkBehaviour
 {
 
     [SerializeField] private CharacterController controller;

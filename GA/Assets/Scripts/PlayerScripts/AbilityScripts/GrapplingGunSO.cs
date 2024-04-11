@@ -144,14 +144,6 @@ public class GrapplingGunSO : AbilitySO
         lineRenderer.SetPosition(0, startPoint);
         lineRenderer.SetPosition(1, endPoint);
 
-        //see if anything is in the way
-        //ok det här funkar inte (fattar INTE varför)
-        /*
-        Debug.Log(direction.magnitude);
-        if(direction.magnitude < grappleMinDistance) {
-            state = GrapplingState.cooldown;
-        }
-        */
 
         Vector3 direction = endPoint - player.transform.position;
         if (Physics.Raycast(player.transform.position, direction.normalized, out RaycastHit hitInfo, direction.magnitude, player.playerMovement.groundMask)) {

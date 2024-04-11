@@ -10,7 +10,7 @@ public class PlayerManager : NetworkBehaviour
     public string playerName;
 
     public CharacterController playerCharacterController;
-    public PlayerMovement2 playerMovement;
+    public PlayerMovement playerMovement;
     public Camera playerCamera;
     public Camera firstPersonPlayerCamera;
     public LineRenderer lineRenderer;
@@ -96,7 +96,7 @@ public class PlayerManager : NetworkBehaviour
 
     private void Start() {
         if (!IsOwner) return;
-        playerMovement = GetComponent<PlayerMovement2>();
+        playerMovement = GetComponent<PlayerMovement>();
         playerCharacterController = GetComponent<CharacterController>();
         lineRenderer = GetComponent<LineRenderer>();
 
@@ -138,8 +138,8 @@ public class PlayerManager : NetworkBehaviour
     }
 
     public void LoadAbilities() {
+
         //remove all models
-        
         foreach (Transform child in firstPersonPlayerCamera.transform) {
             if(child.gameObject.name != "AbilityChips") {
                 Destroy(child.gameObject);

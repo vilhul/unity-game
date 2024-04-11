@@ -110,47 +110,24 @@ public class GameManager : MonoBehaviour
 
                 alivePlayersText.text = "Alive players: " + alivePlayers.Count;
 
-                // Create a list to hold the players that should be removed
                 List<GameObject> playersToRemove = new List<GameObject>();
 
-                // Iterate over alivePlayers to check player health
                 foreach (GameObject player in alivePlayers)
                 {
                     Debug.Log(player.GetComponent<PlayerHealth>().alive.Value);
                     if (!player.GetComponent<PlayerHealth>().alive.Value)
                     {
-                        // Add the player to the list of players to remove
                         playersToRemove.Add(player);
                     }
                 }
 
-                // Remove the players that need to be removed
                 foreach (GameObject playerToRemove in playersToRemove)
                 {
                     alivePlayers.Remove(playerToRemove);
                 }
 
-
-
-
-
-
-
-
-
-                /*
-                alivePlayersText.text = "Alive players: " + alivePlayers.Count;
-
-                foreach(GameObject player in alivePlayers) {
-                    Debug.Log(player.GetComponent<PlayerHealth>().alive.Value);
-                    if(!player.GetComponent<PlayerHealth>().alive.Value) {
-                        alivePlayers.Remove(player);
-                    }
-                }*/
-
                 if (alivePlayers.Count == 1)
                 {
-                    //                    alivePlayers[0].GetComponent<PlayerHealth>().alive.Value = false;
                     winnerAnnouncement.gameObject.SetActive(true);
                     endingCountdown.gameObject.SetActive(true);
                     alivePlayersText.gameObject.SetActive(false);
@@ -191,10 +168,6 @@ public class GameManager : MonoBehaviour
                 shoppingTimer -= Time.deltaTime;
                 if (shoppingTimer <= 0f)
                 {
-                    //spawna på spelare på random positioner igen
-
-
-
                     endingCountdown.gameObject.SetActive(false);
                     startingCountdown.gameObject.SetActive(true);
                     startingTimer = 6f;
